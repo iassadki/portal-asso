@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Asso{% endblock %}
+
+{% block body %}
+    <h1>Create new Asso</h1>
+     {{ include('security/_form_asso.html.twig') }}
+
+    <a href="{{ path('superadmin_dashboard') }}">back to list</a>
+{% endblock %}

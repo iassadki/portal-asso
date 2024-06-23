@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -42,10 +41,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $prenom = null;
 
     #[ORM\Column(type: Types::JSON, nullable: true)]
-    private array $listeEvenements = [];
+    private array $listeEvenements = [""];
 
     #[ORM\ManyToOne(inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Association $asso = null;
 
     /**
@@ -60,10 +59,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'expediteur')]
     private Collection $messages;
 
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'destinataire')]
+    private Collection $messagesRecus;
+
     public function __construct()
     {
         $this->cotisations = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
+        $this->listeEvenements = [];
     }
 
     public function getId(): ?int
@@ -179,18 +183,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addEvenement(Evenement $evenement): static
     {
-        $this->listeEvenements[] = $evenement;
+        if (!in_array($evenement, $this->listeEvenements, true)) {
+            $this->listeEvenements[] = $evenement;
+        }
 
         return $this;
     }
 
     public function removeEvenement(Evenement $evenement): static
     {
-        $key = array_search($evenement, $this->listeEvenements);
-        if ($key !== false) {
-            unset($this->listeEvenements[$key]);
+        $index = array_search($evenement, $this->listeEvenements, true);
+        if ($index !== false) {
+            unset($this->listeEvenements[$index]);
+            // Re-index the array
+            $this->listeEvenements = array_values($this->listeEvenements);
         }
-
         return $this;
     }
 
@@ -264,5 +271,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessageRecus(Message $message): static
+    {
+        if (!$this->messagesRecus->contains($message)) {
+            $this->messagesRecus->add($message);
+            $message->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessageRecus(Message $message): static
+    {
+        if ($this->messagesRecus->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getDestinataire() === $this) {
+                $message->setDestinataire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->prenom . ' ' . $this->nom;
     }
 }

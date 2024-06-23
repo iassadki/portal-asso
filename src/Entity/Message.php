@@ -27,7 +27,7 @@ class Message
     #[ORM\JoinColumn(nullable: false)]
     private ?User $expediteur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\ManyToOne(inversedBy: 'messagesRecus')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $destinataire = null;
 
@@ -94,5 +94,10 @@ class Message
         $this->destinataire = $destinataire;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->objet;
     }
 }

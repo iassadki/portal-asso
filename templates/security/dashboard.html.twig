@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+
+<h1>Admin Dashboard</h1>
+
+{% if is_granted('ROLE_SUPERADMIN') %}
+    <p>Welcome, {{user.prenom}}!</p>
+    
+    <a href="{{ path('superadmin_new_asso')}}">Create a new Asso</a>
+    <a href="{{ path('superadmin_new_user')}}">Create a new User</a>
+    <a href="{{ path('superadmin_logout')}}">Logout</a>
+    
+    <p>Here is the list of all associations</p>
+    <table>
+        <tr>
+            <th>Site</th>
+            <th>Propriétaire</th>
+        </tr>
+        {% for proprietaire in proprietaire %}
+        {% for asso in assos %}
+            <tr>
+                <td>{{ asso.nom }}</td>
+                {% if proprietaire.asso.id == asso.id %}
+                <td>{{ proprietaire.prenom }}</td>
+                {% endif %}
+                {# <td>{{ proprietaire.prenom }}</td> #}
+                {# {% if user.roles == 'ROLE_ADMIN'%}
+                {# <td>{{ proprietaire.prenom }}</td> #}
+                {# {% if user.roles == 'ROLE_ADMIN'%}
+                <td>{{ user.nom }}</td>
+                {% endif %} #}
+            </tr>
+        {% endfor %}
+        {% endfor %}
+    
+{% else %}
+    <p>Sorry, you are not an Admin.</p>
+{% endif %}
+
+{% endblock %}
