@@ -19,21 +19,17 @@
             <th>Site</th>
             <th>Propriétaire</th>
         </tr>
-        {% for proprietaire in proprietaire %}
-        {% for asso in assos %}
+         {% for asso in assos %}
             <tr>
                 <td>{{ asso.nom }}</td>
-                {% if proprietaire.asso.id == asso.id %}
-                <td>{{ proprietaire.prenom }}</td>
-                {% endif %}
-                {# <td>{{ proprietaire.prenom }}</td> #}
-                {# {% if user.roles == 'ROLE_ADMIN'%}
-                {# <td>{{ proprietaire.prenom }}</td> #}
-                {# {% if user.roles == 'ROLE_ADMIN'%}
-                <td>{{ user.nom }}</td>
-                {% endif %} #}
+                <td>
+                    {% for proprietaire in proprietaire %}
+                        {% if proprietaire.asso.id == asso.id %}
+                            {{ proprietaire.prenom }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
             </tr>
-        {% endfor %}
         {% endfor %}
     
 {% else %}

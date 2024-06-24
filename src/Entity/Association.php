@@ -76,6 +76,9 @@ class Association
     #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'asso')]
     private Collection $messages;
 
+    #[ORM\Column]
+    private ?bool $isActivated = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -356,6 +359,18 @@ class Association
                 $message->setAsso(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActivated(): ?bool
+    {
+        return $this->isActivated;
+    }
+
+    public function setActivated(bool $isActivated): static
+    {
+        $this->isActivated = $isActivated;
 
         return $this;
     }
