@@ -1,0 +1,468 @@
+/* DEBUT DU CSS CONCERNE PAR LES PAGES */
+/* GERER LES MEDIA QUERIES PLUS TARD */
+
+/* Connexion */
+.login-section {
+    justify-content: center;
+    align-items: center;
+}
+
+.login-section img {
+    max-width: 150px;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-container {
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.input-container input {
+    width: 100%;
+    text-transform: uppercase;
+    /* color: var(--grey-color); */
+}
+
+/* Choix des rubriques */
+.container-center .grid-item {
+    max-width: 350px;
+    box-shadow: 0 10px 30px 0 rgba(128, 128, 128, 0.4);
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: auto;
+}
+
+.container-center .grid-item ul {
+    list-style-type: none;
+    /* padding: 0; */
+    margin-left: 25px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.container-center .grid-item li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.container-center .grid-item label {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    /* Push the label to the right */
+}
+
+.container-center .grid-item input[type="checkbox"] {
+    display: none;
+    /* Hide the default checkbox */
+}
+
+.container-center .grid-item label img {
+    width: 20px;
+    height: 20px;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.container-center .grid-item img:hover {
+    opacity: 0.7;
+}
+
+/* Choix du Logo */
+.logo-section .grid-item .logo-change img {
+    width: 200px;
+    height: 200px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    /* margin: 0 auto; */
+}
+
+/* Accueil */
+.banner-home {
+    background-image: url("../../assets/img/banners/banner-home.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.informations_banner {
+    background-color: rgba(189, 189, 189, 0.9);
+    padding: 10px;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    text-align: left;
+}
+
+.arrow {
+    color: var(--primary-color);
+}
+
+/* Introduction */
+.introduction {
+    padding: 40px;
+    align-items: center;
+    text-align: center;
+    background-color: var(--third-color);
+    color: var(--white-color);
+}
+
+.text-introduction {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* text-justify: inter-word; */
+}
+
+section {
+    padding: 50px;
+}
+
+/* Rubrics */
+.rubrics {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.rubrics .grid-3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+}
+
+.rubrics .grid-item {
+    position: relative;
+    background-color: var(--white-color);
+    padding-bottom: 20px;
+    width: 300px;
+    height: 350px;
+    border: solid 2px var(--grey-color);
+    border-radius: 0px 0px 10px 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rubrics .grid-item .img-rubrics {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.rubrics .grid-item a#button {
+    margin-top: auto;
+}
+
+.rubrics .grid-item a#button button {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+/* Événements */
+.banner-event {
+    background-image: url("../../assets/img/banners/banner-event.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+    /* margin-top: 40px; */
+}
+
+.events {
+    padding: 40px;
+}
+
+.events .grid-3 {
+    gap: 50px;
+}
+
+.events .grid-item {
+    position: relative;
+    background-color: var(--white-color);
+    padding: 20px;
+    border: solid 1px var(--primary-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.events .grid-item .image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.events .grid-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: solid 2px var(--grey-color);
+}
+
+.events .grid-item .event-title {
+    margin-top: 20px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.events .grid-item .event-date {
+    text-align: left;
+    font-style: italic;
+}
+
+.events .grid-item .bottom-border {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.events .grid-item .event-info {
+    margin-top: 5px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.events .grid-item .event-place {
+    margin-top: 15px;
+    text-align: left;
+    font-style: italic;
+}
+
+.events .grid-item #button {
+    /* margin: 0 auto; */
+    float: center;
+}
+
+.events .grid-item .event-button {
+    margin-top: 10px;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: left;
+    transition: background-color 0.3s ease;
+    /* display: inline-block; */
+}
+
+/* Creation Evenement */
+.banner-events-creation {
+    background-image: url("../../assets/img/banners/banner-add-event.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.event-creation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+}
+
+/* centrer les elements du formulaire de la section class.event-creation */
+.event-creation form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.event-creation form input[type="text"],
+.event-creation form input[type="date"],
+.event-creation form input[type="time"],
+.event-creation form input[type="number"],
+.event-creation form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+/* Calendrier */
+.banner-calendar {
+    background-image: url("../../assets/img/banners/banner-calendar.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+    /* margin-top: 40px; */
+}
+
+.button-go-to {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Galerie */
+.banner-gallery {
+    background-image: url("../../assets/img/banners/banner-gallery.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.gallery {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.gallery .grid-3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+}
+
+.gallery .grid-item {
+    position: relative;
+    background-color: var(--white-color);
+    padding-bottom: 20px;
+    width: 300px;
+    height: 350px;
+    border: solid 2px var(--grey-color);
+    border-radius: 0px 0px 10px 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery .grid-item .img-rubrics {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.gallery .grid-item .gallery-title {
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.gallery .grid-item a#button {
+    margin-top: auto;
+}
+
+.gallery .grid-item a#button button {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.gallery .grid-item .bottom-border {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* .gallery .grid-item .gallery-title {
+    margin-top: 20px;
+    font-weight: 500;
+} */
+
+/* Galerie (photos) */
+.gallery-photos img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Contact */
+.banner-contact {
+    background-image: url("../../assets/img/banners/banner-contact.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.contact {
+    padding: 40px;
+    margin-top: 40px;
+    align-items: center;
+    text-align: center;
+}
+
+.contact .grid-2 {
+    gap: 5px;
+}
+
+.contact .grid-2 .grid-item {
+    margin-left: 5px;
+}
+
+.contact-form input[type="checkbox"] {
+    margin-top: 40px;
+}
+
+.contact .grid-2 .grid-item #button {
+    float: center;
+    margin-top: 5px;
+}
+
+.contact .grid-2 .grid-item img {
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* contact infos */
+.contact .grid-2 .grid-item .contact-infos {
+    text-align: left;
+    margin-left: 40px;
+}

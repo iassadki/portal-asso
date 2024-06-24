@@ -13,7 +13,15 @@ class ConfigurationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('cle')
+            ->add('cle', null, [
+                'required' => true,
+                'label' => false,
+                'attr' => [
+                    'class' => 'input-container',
+                    'placeholder' => "Clé de l'association"
+                ]
+            ]
+            )
             ->add('user',ConfigurationUserType::class, [
                 'label' => false,
                 'mapped' => false

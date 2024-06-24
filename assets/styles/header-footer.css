@@ -1,0 +1,122 @@
+/* HEADER/FOOTER CSS */
+header {
+    text-align: center;
+}
+
+header nav {
+    background-color: var(--white-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+}
+
+header nav .logo img {
+    /* background-image: url("../../assets/logos/portal-asso.png"); */
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
+    width: 60px;
+    margin-left: 20px;
+    align-items: center;
+}
+
+header nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    margin-right: 15px;
+}
+
+header nav ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.left-icons-nav {
+    display: flex;
+    align-items: center;
+}
+
+.left-icons-nav img {
+    width: 25px;
+}
+
+.left-icons-nav li {
+    margin-left: 10px;
+}
+
+.bottom-border {
+    border-bottom: 2px solid #000;
+}
+
+/* HEADER/FOOTER CSS */
+footer {
+    background-color: var(--primary-color);
+    padding-top: 20px;
+}
+
+footer .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+footer .grid-item h2 {
+    margin-bottom: 10px;
+    color: var(--third-color);
+}
+
+footer .grid-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .grid-item ul li {
+    margin-bottom: 10px;
+}
+
+footer .grid-item ul li a {
+    color: var(--white-color);
+    text-decoration: none;
+}
+
+footer .grid-item ul li a:hover {
+    text-decoration: underline;
+}
+
+footer .grid-container-2 {
+    background-color: var(--white-color);
+}
+
+footer .footer-association-logo {
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer .footer-association-name {
+    color: var(--primary-color);
+    text-align: center;
+    margin-top: 10px;
+}
+
+footer .up-arrow img {
+    position: absolute;
+    width: 30px;
+    margin-bottom: 200px;
+    /* float: right; */
+}

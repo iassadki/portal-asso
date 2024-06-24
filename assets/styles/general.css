@@ -1,0 +1,417 @@
+/* Réinitialisation des styles par défaut */
+
+/* GENERAL CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #02232c;
+    --secondary-color: #22a5dd;
+    /* secondary : #22a5dd */
+    /* blue      : #2196f3 */
+    --third-color: #e55924;
+    --blue-color: #2196f3;
+    --black-color: #000000;
+    --white-color: #ffffff;
+    --grey-color: #d8d6d6;
+    --grey2-color: #666666;
+    --primary-font: "Montserrat", sans-serif;
+    --secondary-font: "Open Sans", sans-serif;
+    --third-font: "Lato", sans-serif;
+}
+
+/* Styles de base pour le corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Styles pour les liens */
+a {
+    font-family: var(--primary-font);
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--third-color);
+}
+
+/* Styles pour les titres */
+h1 {
+    font-family: var(--primary-font);
+    font-size: 36px;
+    /* margin-bottom: 25px; */
+}
+
+h2 {
+    font-family: var(--primary-font);
+    font-size: 28px;
+    /* margin-bottom: 25px; */
+}
+
+h3 {
+    font-family: var(--primary-font);
+    font-size: 18px;
+    /* margin-bottom: 25px; */
+}
+
+p {
+    font-family: var(--primary-font);
+    font-size: 16px;
+}
+
+/* Input avec bordures basiques */
+input {
+    font-family: var(--primary-font);
+    font-size: 16px;
+    padding: 15px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+}
+
+/* Labels pour les inputs des formulaires */
+section label {
+    font-family: var(--primary-font);
+    color: var(--third-color);
+    /* float: left; */
+    /* text-align: left; */
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+/* Styles pour les conteneurs */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Container au centre */
+.container-center {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Styles pour les boutons */
+#button {
+    margin-top: 20px;
+}
+
+#button button {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border: solid 2px var(--secondary-color);
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: var(--white-color);
+    color: var(--secondary-color);
+    transition: background-color 0.3s ease;
+}
+
+#button button:hover {
+    background-color: var(--secondary-color);
+    border: solid 2px var(--secondary-color);
+    color: var(--white-color);
+    animation: pulse 0.5s infinite alternate;
+}
+
+/* Styles pour les boutons (Bouton avec flèche) */
+.button-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border: 2px solid #00a2e8;
+    border-radius: 25px;
+    background-color: white;
+    color: #00a2e8;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.button-arrow .right-arrow {
+    width: 20px;
+    height: 30px;
+    margin-left: 30px;
+}
+
+.button-arrow:hover {
+    background-color: #e0f7ff;
+}
+
+/* Styles pour les boutons (Bouton couleur primaire) */
+#button-primary {
+    margin-top: 20px;
+}
+
+#button-primary button {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 100px;
+    border-radius: 5px;
+    cursor: pointer;
+    /* met une ombre au bouton */
+    border: solid 2px var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    transition: background-color 0.3s ease;
+}
+
+#button-primary button:hover {
+    background-color: var(--white-color);
+    border: solid 2px var(--primary-color);
+    color: var(--primary-color);
+    animation: pulse 0.5s infinite alternate;
+}
+
+/* Styles pour les boutons (Bouton couleur tertiaire) */
+#button-third {
+    margin-top: 20px;
+}
+
+#button-third button {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 100px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px 0 rgba(128, 128, 128, 0.4);
+    border: solid 2px var(--third-color);
+    background-color: var(--third-color);
+    color: var(--white-color);
+    transition: background-color 0.3s ease;
+}
+
+#button-third button:hover {
+    background-color: var(--white-color);
+    border: solid 2px var(--third-color);
+    color: var(--third-color);
+    animation: pulse 0.5s infinite alternate;
+}
+
+/* Bouton add-more, pour ajouter du contenu */
+section .add-more {
+    text-align: right;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+section .add-more img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+/* Bouton retour */
+section .return-arrow {
+    float: left;
+    /* margin-bottom: 50px; */
+    /* margin-top: 30px; */
+}
+
+section .return-arrow img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+/* Grid de 3 en CSS */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Grid de 2 en CSS */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.grid-1 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    /* gap: 20px; */
+    justify-content: center;
+    text-align: center;
+}
+
+.grid-item {
+    text-align: center;
+}
+
+.grid-item img {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+}
+
+/* Titres de section */
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* Formulaire */
+.contact-form {
+    text-align: left;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    /* met une bordure aux elements du formulaire mais que au niveau de bas */
+    width: 95%;
+    border: none;
+    border-bottom: 2px solid var(--grey2-color);
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: var(--primary-font);
+    transition: background-color 0.3s ease;
+}
+
+.contact-form textarea {
+    /* a faire en  carré */
+    height: 200px;
+    resize: none;
+}
+
+/* Choix de fichier */
+.file-choose {
+    width: 100%;
+    height: 70px;
+    border: 2px solid var(--grey-color);
+    padding: 10px 0px 0px 0px;
+    font-size: 16px;
+    font-family: var(--primary-font);
+    transition: background-color 0.3s ease;
+    justify-content: center;
+}
+
+.file-choose label {
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    /* display: flex; */
+    color: var(--grey2-color);
+    cursor: pointer;
+}
+
+.limit-files {
+    font-style: italic;
+    font-size: 13px;
+    margin-top: 5px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+/* Rond Setp (Etapes) */
+.step-container {
+    display: flex;
+    justify-content: center;
+}
+
+.step {
+    width: 50px;
+    height: 50px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color: var(--primary-color);
+    color: var(--third-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* Choix des couleurs */
+.color-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.color-option {
+    display: contents;
+    /* Allow children to be placed in the grid */
+}
+
+.color-text {
+    grid-column: 1 / 2;
+    text-align: left;
+    font-weight: bold;
+}
+
+.color-box {
+    grid-column: 2 / 3;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    margin-right: 10px;
+    justify-self: center;
+}
+
+.color-modify {
+    /* grid-column: 3 / 4; */
+    text-align: left;
+    color: var(--primary-color);
+    font-size: 10px;
+    /* margin-right: 20px; */
+}
+
+.color-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    grid-column: span 3;
+}
+
+.color-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+    margin-bottom: 10px;
+}
+
+.color-code,
+.color-input {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}

@@ -59,7 +59,10 @@
         },
         "files": [
             "./assets/app.js",
-            "./assets/styles/app.css",
+            "./script/script.js",
+            "./assets/styles/styles.css",
+            "./assets/styles/general.css",
+            "./assets/styles/header-footer.css",
             "./config/packages/asset_mapper.yaml",
             "./importmap.php"
         ]
