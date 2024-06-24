@@ -47,14 +47,7 @@ class SuperAdminController extends AbstractController
     public function dashboard(AssociationRepository $associationRepository, UserRepository $userRepository): Response
     {
         $user = $this->getUser();
-        dump($user);
-
-        //recuperer l'id de l'asso
-        // $assoId = $associationRepository->getAsso()->getId();
-
-        //tous les users avec un role admin
         $proprietaire = $userRepository->findByRole('ROLE_PROPRIETAIRE');
-        dump($userRepository->findAll());
 
         return $this->render('security/dashboard.html.twig', [
             'assos' => $associationRepository->findAll(),
@@ -81,6 +74,7 @@ class SuperAdminController extends AbstractController
             $asso->setPaiementCheck(false);
             $asso->setGalerieCheck(false);
             $asso->setMessageCheck(false);
+            $asso->setActivated(false);
 
             $entityManager->persist($asso);
             $entityManager->flush();

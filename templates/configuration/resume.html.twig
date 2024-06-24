@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Récapitulatif{% endblock %}
+
+{% block body %}
+    <h1>Récapitulatif</h1>
+    <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+        <div style="border: 1px solid #ccc; padding: 20px; width: 30%;">
+            <ul style="list-style: none; padding: 0;">
+                <li><input type="checkbox" {% if paiement %}checked{% endif %} disabled> Accueil</li>
+                <li><input type="checkbox" {% if message %}checked{% endif %} disabled> Événements</li>
+                <li><input type="checkbox" {% if evenement %}checked{% endif %} disabled> Calendrier</li>
+                <li><input type="checkbox" {% if galerie %}checked{% endif %} disabled> Galerie</li>
+                <li><input type="checkbox" {% if paiement %}checked{% endif %} disabled> Contact</li>
+                <li><input type="checkbox" {% if paiement %}checked{% endif %} disabled> Cotisation</li>
+            </ul>
+            <a href="{{ path('configuration_personalisation_1', {'name' : name}) }}"><button class="btn btn-primary">MODIFIER</button></a>
+        </div>
+        <div style="border: 1px solid #ccc; padding: 20px; width: 30%; text-align: center;">
+            <img src="../../public/uploads/logo/logo.png" alt="Association Image" style="max-width: 100%;">
+            <a href="{{ path('configuration_personalisation_2', {'name' : name}) }}"><button class="btn btn-primary">MODIFIER</button></a>
+        </div>
+        <div style="border: 1px solid #ccc; padding: 20px; width: 30%;">
+            <ul style="list-style: none; padding: 0;">
+                <li>Primaire <span style="background-color: {{ couleurPrimaire }}; display: inline-block; width: 20px; height: 20px;"></span></li>
+                <li>Secondaire <span style="background-color: {{ couleurSecondaire }}; display: inline-block; width: 20px; height: 20px;"></span> </li>
+                <li>Tertiaire <span style="background-color: {{ couleurTertiaire }}; display: inline-block; width: 20px; height: 20px;"></span> </li>
+            </ul>
+          <a href="{{ path('configuration_personalisation_3', {'name' : name}) }}"><button class="btn btn-primary">MODIFIER</button></a>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <button class="btn btn-success">VALIDER</button>
+    </div>
+{% endblock %}

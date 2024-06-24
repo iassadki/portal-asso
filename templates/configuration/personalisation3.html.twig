@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Personalisation 3{% endblock %}
+
+{% block body %}
+    <h1>Personalisation 3</h1>
+    {{ form_start(colorForm) }}
+    {{ form_row(colorForm.couleurPrimaire) }}
+    {{ form_row(colorForm.couleurSecondaire) }}
+    {{ form_row(colorForm.couleurTertiaire) }}
+        <button type="submit">Enregistrer</button>
+    {{ form_end(colorForm) }}
+    <a href="{{ path('configuration_personalisation_resume', {'name' : name}) }}">Continue without colors</a>
+{% endblock %}
+
