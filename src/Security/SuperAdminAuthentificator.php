@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class SuperAdminAuthenticator extends AbstractLoginFormAuthenticator
+class SuperAdminAuthentificator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
@@ -30,8 +30,6 @@ class SuperAdminAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
-        dump($email);
-        dump($request->request->get('password', ''));
 
         $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
 

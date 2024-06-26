@@ -1,3 +1,12 @@
+{% extends 'base.html.twig' %}
 
+{% block title %}Hello!{% endblock %}
 
-<a href="{{ path('superadmin_login')}}">Superadmin</a>
+{% block body %}
+    <h1>Hello!</h1>
+
+    
+    <a href="{{ path('superadmin_login')}}">Superadmin</a>
+    <a href="{{ path('login')}}">Login</a>
+
+{% endblock %}

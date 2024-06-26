@@ -259,6 +259,11 @@ class Association
         return $this->listeUsers;
     }
 
+    public function countListUsers(): int
+    {
+        return count($this->listeUsers);
+    }
+
     public function setListUsers(array $listeUsers): static
     {
         $this->listeUsers = $listeUsers;

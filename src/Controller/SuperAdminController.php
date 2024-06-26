@@ -14,7 +14,6 @@ use App\Entity\Association;
 use App\Form\AssociationType;
 use App\Repository\AssociationRepository;
 use App\Repository\UserRepository;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route(path: '/superadmin', name: 'superadmin_')]
@@ -24,6 +23,7 @@ class SuperAdminController extends AbstractController
     #[Route(path: '/', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        dump($this->getUser());
         if ($this->getUser() !== null && $this->getUser()->getRoles() === ['ROLE_SUPERADMIN']) {
             return $this->redirectToRoute('superadmin_dashboard');
         }
@@ -48,9 +48,22 @@ class SuperAdminController extends AbstractController
     {
         $user = $this->getUser();
         $proprietaire = $userRepository->findByRole('ROLE_PROPRIETAIRE');
-
+        
+        $associations = $associationRepository->findAll();
+        $associationsWithUserCount = [];
+    
+        foreach ($associations as $association) {
+            // Supposant que l'entité Association a une méthode countUsers()
+            $userCount = $association->countListUsers();
+            // Ajouter le nombre d'utilisateurs à un tableau ou à l'objet association
+            $associationsWithUserCount[] = [
+                'association' => $association,
+                'userCount' => $userCount,
+            ];
+        }
+        
         return $this->render('security/dashboard.html.twig', [
-            'assos' => $associationRepository->findAll(),
+            'assos' => $associationsWithUserCount,
             'user' => $user,
             'proprietaire' => $proprietaire,
         ]);
@@ -89,7 +102,7 @@ class SuperAdminController extends AbstractController
     }
 
     #[Route(path: '/new_user', name: 'new_user', methods: ['GET', 'POST'])]
-    public function newUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasherInterface): Response
+    public function newUser(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasherInterface, AssociationRepository $associationRepository, UserRepository $userRepository): Response
     {
         $user = new User();
         $form = $this->createForm(SuperAdminUserType::class, $user);
@@ -112,7 +125,15 @@ class SuperAdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            $userAsso = $userRepository->findOneBy(['email' => $form->get('email')->getData()]);
+            
+            $asso = $associationRepository->findOneBy(['id' => $form->get('asso')->getData()]);
+            $asso->addListeUsers($userAsso->getId());
+
+            $entityManager->persist($asso);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('superadmin_dashboard', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('security/new_user.html.twig', [

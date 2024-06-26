@@ -9,20 +9,32 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+    
     firewalls:
+        
+        superadmin:
+            lazy: true
+            pattern: ^/superadmin
+            custom_authenticators: 
+                - App\Security\SuperAdminAuthentificator
+            provider: app_user_provider
+            logout:
+                path: /superadmin/logout
+                target: /superadmin/
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            lazy: true
+           
             provider: app_user_provider
-            custom_authenticator: App\Security\SuperAdminAuthenticator
-            
-
+            custom_authenticator: App\Security\UserAuthentificator
+            logout:
+                path: /logout
+                target: /
             remember_me:
                 secret: '%kernel.secret%'
-                lifetime: 604800
-                path: /
+                lifetime: 604800 # 1 week in seconds
             
                 # by default, the feature is enabled by checking a checkbox in the
                 # login form, uncomment the following line to always enable it.
@@ -30,9 +42,6 @@ security:
                 # where to redirect after logout
                 # target: app_any_route
 
-            logout:
-                path: /superadmin/logout
-                target: /superadmin/
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 

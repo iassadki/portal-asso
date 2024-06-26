@@ -1,57 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Association index{% endblock %}
-
 {% block body %}
+    <style>
+        .flex-ul {
+            display: flex;
+            /* Add any additional styling here */
+            list-style: none; /* Removes bullet points */
+            gap: 10px; /* Adds space between items */
+        }
+    </style>
+
     <h1>Association index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Siret</th>
-                <th>Cle</th>
-                <th>Slogan</th>
-                <th>CouleurPrimaire</th>
-                <th>CouleurSecondaire</th>
-                <th>CouleurTertiaire</th>
-                <th>PaiementCheck</th>
-                <th>MessageCheck</th>
-                <th>GalerieCheck</th>
-                <th>EvenementCheck</th>
-                <th>ListeUsers</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for association in associations %}
-            <tr>
-                <td>{{ association.id }}</td>
-                <td>{{ association.nom }}</td>
-                <td>{{ association.siret }}</td>
-                <td>{{ association.cle }}</td>
-                <td>{{ association.slogan }}</td>
-                <td>{{ association.couleurPrimaire }}</td>
-                <td>{{ association.couleurSecondaire }}</td>
-                <td>{{ association.couleurTertiaire }}</td>
-                <td>{{ association.paiementCheck ? 'Yes' : 'No' }}</td>
-                <td>{{ association.messageCheck ? 'Yes' : 'No' }}</td>
-                <td>{{ association.galerieCheck ? 'Yes' : 'No' }}</td>
-                <td>{{ association.evenementCheck ? 'Yes' : 'No' }}</td>
-                <td>{{ association.listeUsers ? association.listeUsers|json_encode : '' }}</td>
-                <td>
-                    <a href="{{ path('app_association_show', {'id': association.id}) }}">show</a>
-                    <a href="{{ path('app_association_edit', {'id': association.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="14">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <header>
+        <ul class="flex-ul">
+            <li><a href="{{ path('home') }}">Accueil</a></li>
+            {% if paiement is same as(true) %}
+                <li><a href="{{ path('home') }}">Paiement</a></li>
+            {% endif %}
+            {% if evenement is same as(true) %}
+                <li><a href="{{ path('home') }}">Evenement</a></li>
+                <li><a href="{{ path('home') }}">Calendrier</a></li>
+            {% endif %}
+            {% if message is same as(true) %}
+                <li><a href="{{ path('home') }}">Contact</a></li>
+            {% endif %}
+            {% if galerie is same as(true) %}
+                <li><a href="{{ path('home') }}">Galerie</a></li>
+            {% endif %}
+        </ul>
+    </header>
 
-    <a href="{{ path('app_association_new') }}">Create new</a>
 {% endblock %}

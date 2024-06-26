@@ -9,20 +9,31 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/association')]
+#[Route('/portalAsso', name: 'association_')]
 class AssociationController extends AbstractController
 {
-    #[Route('/', name: 'app_association_index', methods: ['GET'])]
-    public function index(AssociationRepository $associationRepository): Response
+    #[Route('/{name}', name: 'home', methods: ['GET'])]
+    public function index(string $name, AssociationRepository $associationRepository): Response
     {
+        $association = $associationRepository->findOneBy(['nom' => $name]);
+        
+        $paiement = $association->isPaiementCheck();
+        $message = $association->isMessageCheck();
+        $evenement = $association->isEvenementCheck();
+        $galerie = $association->isGalerieCheck();
+
         return $this->render('association/index.html.twig', [
-            'associations' => $associationRepository->findAll(),
+            'associations' => $association,
+            'paiement' => $paiement,
+            'message' => $message,
+            'evenement' => $evenement,
+            'galerie' => $galerie,
         ]);
     }
 
-    #[Route('/new', name: 'app_association_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $association = new Association();
@@ -33,7 +44,7 @@ class AssociationController extends AbstractController
             $entityManager->persist($association);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_association_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('association_home', ['name' => $association->getNom()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('association/new.html.twig', [
@@ -42,16 +53,16 @@ class AssociationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_association_show', methods: ['GET'])]
-    public function show(Association $association): Response
+    #[Route('/{name}/{id}', name: 'show', methods: ['GET'])]
+    public function show(string $name, Association $association): Response
     {
         return $this->render('association/show.html.twig', [
             'association' => $association,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_association_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Association $association, EntityManagerInterface $entityManager): Response
+    #[Route('/{name}/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, string $name, Association $association, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(AssociationType::class, $association);
         $form->handleRequest($request);
@@ -59,7 +70,7 @@ class AssociationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_association_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('association_home', ['name' => $association->getNom()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('association/edit.html.twig', [
@@ -68,14 +79,14 @@ class AssociationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_association_delete', methods: ['POST'])]
-    public function delete(Request $request, Association $association, EntityManagerInterface $entityManager): Response
+    #[Route('/{name}/{id}', name: 'delete', methods: ['POST'])]
+    public function delete(Request $request, string $name, Association $association, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$association->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$association->getId(), $request->request->get('_token'))) {
             $entityManager->remove($association);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_association_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('association_home', ['name' => $association->getNom()], Response::HTTP_SEE_OTHER);
     }
 }

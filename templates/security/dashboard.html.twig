@@ -18,17 +18,19 @@
         <tr>
             <th>Site</th>
             <th>Propriétaire</th>
+            <th>Nombre de membres</th>
         </tr>
-         {% for asso in assos %}
+         {% for item in assos %}
             <tr>
-                <td>{{ asso.nom }}</td>
+                <td>{{ item.association.nom }}</td>
                 <td>
                     {% for proprietaire in proprietaire %}
-                        {% if proprietaire.asso.id == asso.id %}
+                        {% if proprietaire.asso.id == item.association.id %}
                             {{ proprietaire.prenom }}
                         {% endif %}
                     {% endfor %}
                 </td>
+                <td>{{ item.userCount }}</td>
             </tr>
         {% endfor %}
     
