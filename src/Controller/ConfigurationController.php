@@ -13,18 +13,29 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Form\LogoType;
+use Doctrine\Common\Lexer\Token;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 
 #[Route(path: '/configuration', name: 'configuration_')]
 class ConfigurationController extends AbstractController
 {
+    private $tokenStorage;
+    public function __construct(TokenStorageInterface $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
+
     #[Route(path: '/', name: 'login')]
     public function index(
         UserRepository $userRepository, 
         AssociationRepository $associationRepository,
         Request $request,
         UserPasswordHasherInterface $userPasswordHasherInterface,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager, 
     ): Response
     {
         $form = $this->createForm(ConfigurationFormType::class);
@@ -32,23 +43,22 @@ class ConfigurationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userData = $form->get('user')->getData();
-            dump($userData);
             $user = $userRepository->findOneBy(['email' => $userData->getEmail()]);
-            dump($user);
-            dump($user->getPassword());
-            dump($userPasswordHasherInterface->hashPassword($user, $form->get('user')->get('oldPassword')->getData()));
-            dump($form->get('user')->get('oldPassword')->getData());
-            dump($userPasswordHasherInterface->isPasswordValid($user, $form->get('user')->get('oldPassword')->getData()));
             if ($user && $userPasswordHasherInterface->isPasswordValid($user, $form->get('user')->get('oldPassword')->getData())) {
-                $cle = $associationRepository->findOneBy(['cle' => $form->get('cle')->getData()]);
-                dump($cle);
+                $cle = $associationRepository->findOneBy(['cle' => $form->get('cle')->getData()]); 
                 if ($cle) {
                     $newHashedPassword = $userPasswordHasherInterface->hashPassword($user, $form->get('user')->get('newPassword')->getData());
-                    dump($newHashedPassword);
                     if ($form->get('user')->get('newPassword')->getData() === $form->get('user')->get('confirmPassword')->getData()) {
                         $user->setPassword($newHashedPassword);
                         $entityManager->persist($user);
                         $entityManager->flush();
+                        $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
+                        $this->tokenStorage->setToken($token);
+                        
+                        if($cle->isActivated() == true){
+                            return $this->redirectToRoute('association_home', ['name' => $cle->getNom()]);
+                        }
+                        
                         $assoName = $cle->getNom();
                         return $this->redirectToRoute('configuration_personalisation_1', ['name' => $assoName]);
                     } else {
@@ -190,12 +200,10 @@ class ConfigurationController extends AbstractController
     }
 
     #[Route(path: '/{name}/resume', name: 'personalisation_resume')]
-    public function resume(string $name, AssociationRepository $associationRepository): Response
+    public function resume(string $name, AssociationRepository $associationRepository, EntityManagerInterface $entityManager): Response
     {
         $asso = $associationRepository->findOneBy(['nom' => $name]);
         $assoName = $asso->getNom();
-
-       
 
         $assoPaiement = $asso->isPaiementCheck();
         $assoMessage = $asso->isMessageCheck();
@@ -204,6 +212,10 @@ class ConfigurationController extends AbstractController
         $assoCouleurPrimaire = $asso->getCouleurPrimaire();
         $assoCouleurSecondaire = $asso->getCouleurSecondaire();
         $assoCouleurTertiaire = $asso->getCouleurTertiaire();
+
+        $assoActivate = $asso->setActivated(true);
+        $entityManager->persist($assoActivate);
+        $entityManager->flush();
 
         return $this->render('configuration/resume.html.twig',[
             'name' => $assoName,

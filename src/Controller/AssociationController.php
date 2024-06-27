@@ -29,7 +29,7 @@ class AssociationController extends AbstractController
             'paiement' => $paiement,
             'message' => $message,
             'evenement' => $evenement,
-            'galerie' => $galerie,
+            'galerie' => $galerie
         ]);
     }
 
