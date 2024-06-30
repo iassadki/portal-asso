@@ -20,7 +20,7 @@
                 <li><a href="{{ path('home') }}">Paiement</a></li>
             {% endif %}
             {% if evenement is same as(true) %}
-                <li><a href="{{ path('home') }}">Evenement</a></li>
+                <li><a href="{{ path('association_evenements', {'name' : name}) }}">Evenement</a></li>
                 <li><a href="{{ path('home') }}">Calendrier</a></li>
             {% endif %}
             {% if message is same as(true) %}
@@ -28,6 +28,12 @@
             {% endif %}
             {% if galerie is same as(true) %}
                 <li><a href="{{ path('home') }}">Galerie</a></li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_PROPRIETAIRE')%}
+                <li><a href="{{ path('association_admin',{'name': name}) }}">Admin</a></li>
+                <li><a href="{{ path('association_personalisation_1',{'name': name}) }}">Ajouter/Supprimer une rubrique</a></li>
+                <li><a href="{{ path('association_personalisation_2',{'name': name}) }}">Changer le logo</a></li>
+                <li><a href="{{ path('association_personalisation_3',{'name': name}) }}">Changer les couleurs</a></li>
             {% endif %}
         </ul>
     </header>

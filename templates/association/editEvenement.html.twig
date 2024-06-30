@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les évènements{% endblock %}
+
+{% block body %}
+    <h1>Edit Event</h1>
+
+    {{ include('association/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('association_evenement',{'name': name}) }}">EVENEMENT</a>
+    {{ include('association/_delete_evenement_form.html.twig') }}
+{% endblock %}

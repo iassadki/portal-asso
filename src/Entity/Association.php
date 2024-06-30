@@ -278,6 +278,17 @@ class Association
         return $this;
     }
 
+    public function removeListeUsers(int $listeUsers): static
+    {
+        $key = array_search($listeUsers, $this->listeUsers);
+
+        if ($key !== false) {
+            unset($this->listeUsers[$key]);
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Galerie>
      */

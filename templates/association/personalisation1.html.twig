@@ -1,0 +1,12 @@
+{% extends ('base.html.twig') %}
+
+{% block title %}Personalisation 1{% endblock %}
+
+{% block body %}
+    <h1>Personalisation 1</h1>
+
+    {{ include('association/_form.html.twig') }}
+    <a href="{{ path('association_home', {'name' : name}) }}">Retour</a>
+
+{% endblock %}
+

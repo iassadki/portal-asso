@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenements{% endblock %}
+{% block body %}
+    <style>
+        .flex-ul {
+            display: flex;
+            /* Add any additional styling here */
+            list-style: none; /* Removes bullet points */
+            gap: 10px; /* Adds space between items */
+        }
+    </style>
+
+    <h1>Tous les evenements</h1>
+    <a href="{{ path('association_evenements_new', {'name': name}) }}">Ajouter un evenement</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Lieu</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evenement in evenements %}
+                <tr>
+                    <td>{{ evenement.event.nom }}</td>
+                    {% if evenement.event.dateDebut|date('Y-m-d') == evenement.event.dateFin|date('Y-m-d') %}
+                        <td>{{ evenement.event.dateDebut|date('Y-m-d') }}</td>
+                    {% else %}
+                        <td>{{ evenement.event.dateDebut|date('Y-m-d') }} - {{ evenement.event.dateFin|date('Y-m-d') }}</td>
+                    {% endif %}
+                    <td>{{ evenement.event.description }}</td>
+                    <td>{{ evenement.event.lieu }}</td>
+                    <td>
+                        <a href="{{ path('association_evenements_edit', {'id': evenement.event.id, 'name': name}) }}">edit</a>
+                        <a href="{{ path('association_evenements_delete', {'id': evenement.event.id, 'name': name}) }}">delete</a>
+
+                        <a href="{{ path('association_evenements_add', {'id': evenement.event.id, 'name': name}) }}">
+                        {% if evenement.participate %}
+                            Annuler participation
+                        {% else %}
+                            Participer
+                        {% endif %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

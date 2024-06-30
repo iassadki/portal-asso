@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin dashboard{% endblock %}
+
+{% block body %}
+    <h1>Admin dashboard</h1>
+
+    <a href="{{ path('association_admin_newUser', {'name' : name}) }}">Add a new member</a>
+
+    <h2>Members of {{ name }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.prenom }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% for role in user.roles %}
+                            {{ role }}
+                            {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <ul>
+                            <li><a href="{{ path('association_admin_editUser', {'name' : name, 'id' : user.id}) }}">Edit</a></li>
+                            <li><a href="{{ path('association_admin_deleteUser', {'name' : name, 'id' : user.id}) }}">Delete</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        console.log('Hello from admin dashboard');
+    </script>
+{% endblock %}

@@ -106,8 +106,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
+    
         return array_unique($roles);
     }
 
@@ -181,7 +180,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function addEvenement(Evenement $evenement): static
+    public function addEvenement(int $evenement): static
     {
         if (!in_array($evenement, $this->listeEvenements, true)) {
             $this->listeEvenements[] = $evenement;
@@ -190,7 +189,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeEvenement(Evenement $evenement): static
+    public function removeEvenement(int $evenement): static
     {
         $index = array_search($evenement, $this->listeEvenements, true);
         if ($index !== false) {
