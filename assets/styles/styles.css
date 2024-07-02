@@ -12,6 +12,19 @@
     margin-bottom: 20px;
 }
 
+.login-title {
+    /* white-space: nowrap; */
+    margin: auto;
+}
+
+.login-section .grid-1 .grid-item {
+    padding: 20px;
+    background-color: var(--white-color);
+    border: solid 0px var(--grey-color);
+    box-shadow: none;
+    margin: auto;
+}
+
 .login-form {
     display: flex;
     flex-direction: column;
@@ -26,8 +39,35 @@
 
 .input-container input {
     width: 100%;
-    text-transform: uppercase;
-    /* color: var(--grey-color); */
+    /* text-transform: uppercase; */
+}
+
+.checkbox-connexion {
+    display: flex;
+    width: 100%;
+    /* align-items: center; */
+}
+
+.checkbox-connexion label {
+    display: flex;
+    color: var(--secondary-color);
+}
+
+.checkbox-connexion input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-connexion img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.checkbox-connexion span {
+    white-space: nowrap;
+    margin-left: 20px;
+    color: var(--primary-color);
 }
 
 /* Choix des rubriques */
@@ -65,11 +105,6 @@
     /* Push the label to the right */
 }
 
-.container-center .grid-item input[type="checkbox"] {
-    display: none;
-    /* Hide the default checkbox */
-}
-
 .container-center .grid-item label img {
     width: 20px;
     height: 20px;
@@ -90,19 +125,99 @@
     /* margin: 0 auto; */
 }
 
-/* Accueil */
-.banner-home {
-    background-image: url("../../assets/img/banners/banner-home.png");
-    background-size: cover;
-    background-position: center;
+/* Choix des couleurs */
+/* ... */
+
+/* Récapitulatif des choix */
+.recap-choix .container-center .grid-item {
+    background: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    min-width: 350px;
+    min-height: 400px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: 100%;
-    height: 400px;
-    color: var(--primary-color);
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grid-item .logo-change img {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    /* Ajuster l'espacement entre les éléments */
+}
+
+.recap-choix .grid-item {
+    background: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    min-height: 300px;
     position: relative;
 }
+
+.recap-choix .grid-item button {
+    position: absolute;
+    bottom: 20px;
+    right: 0px;
+}
+
+.recap-choix .grid-item .button-link {
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.recap-choix .grid-item ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recap-choix .grid-item .logo-change img {
+    max-width: 100%;
+    height: auto;
+}
+
+.recap-choix .grid-item .color-selection .color-option {
+    margin-bottom: 10px;
+}
+
+.recap-choix .grid-item .color-selection .color-box {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+}
+
+.recap-choix .grid-item .color-selection .color-modify {
+    text-decoration: none;
+}
+
+.recap-choix #button-third {
+    margin-top: 50px;
+}
+
+/* .recap-choix .grid-item button {
+    bottom: 0;
+}
+
+.recap-choix .container-center .grid-item {
+    margin-top: 20px;
+    margin-bottom: 20px;
+} */
+
+/* .recap-choix .container-center .grid-item button { */
+/* margin-top: 20px; */
+/* margin-bottom: 20px; */
+/* } */
+
 
 .informations_banner {
     background-color: rgba(189, 189, 189, 0.9);
@@ -134,11 +249,64 @@
     /* text-justify: inter-word; */
 }
 
+/* METTRE DANS GENERAL CSS DEBUT */
 section {
     padding: 50px;
 }
 
-/* Rubrics */
+section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* SUPEr6ADMIN */
+.super-admin {
+    padding: 40px;
+    margin-top: 40px;
+    align-items: center;
+    text-align: left;
+}
+
+.superadmin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.superadmin-table th {
+    background-color: var(--primary-color);
+    color: var(--third-color);
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.superadmin-table td {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+.superadmin-table td:first-child,
+.superadmin-table td:nth-child(2) {
+    text-align: left;
+}
+
+.superadmin-table td:nth-child(3) {
+    text-align: right;
+}
+
+.superadmin-table td:last-child {
+    text-align: left;
+}
+
+.superadmin-table a {
+    cursor: pointer;
+}
+
+/* tr:nth-child(even) td {
+    background-color: #f2f2f2;
+} */
+
 .rubrics {
     margin: 0 auto;
     text-align: center;
@@ -171,30 +339,7 @@ section {
     object-fit: cover;
 }
 
-.rubrics .grid-item a#button {
-    margin-top: auto;
-}
-
-.rubrics .grid-item a#button button {
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-/* Événements */
-.banner-event {
-    background-image: url("../../assets/img/banners/banner-event.png");
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: 100%;
-    height: 400px;
-    color: var(--primary-color);
-    position: relative;
-    /* margin-top: 40px; */
-}
-
+/* Events */
 .events {
     padding: 40px;
 }
@@ -219,7 +364,7 @@ section {
     border-radius: 10px;
 }
 
-.events .grid-item img {
+.events .grid-item .image-event {
     width: 100%;
     height: 200px;
     object-fit: cover;
@@ -250,16 +395,16 @@ section {
 
 .events .grid-item .event-place {
     margin-top: 15px;
+    margin-bottom: 25px;
     text-align: left;
     font-style: italic;
 }
 
-.events .grid-item #button {
-    /* margin: 0 auto; */
+/* .events .grid-item #button {
     float: center;
-}
+} */
 
-.events .grid-item .event-button {
+/* .events .grid-item .event-button {
     margin-top: 10px;
     color: #fff;
     border: none;
@@ -268,90 +413,16 @@ section {
     cursor: pointer;
     float: left;
     transition: background-color 0.3s ease;
-    /* display: inline-block; */
-}
-
-/* Creation Evenement */
-.banner-events-creation {
-    background-image: url("../../assets/img/banners/banner-add-event.png");
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: 100%;
-    height: 400px;
-    color: var(--primary-color);
-    position: relative;
-}
-
-.event-creation {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* height: 100vh; */
-}
-
-/* centrer les elements du formulaire de la section class.event-creation */
-.event-creation form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 500px;
-}
-
-.event-creation form input[type="text"],
-.event-creation form input[type="date"],
-.event-creation form input[type="time"],
-.event-creation form input[type="number"],
-.event-creation form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--primary-color);
-    border-radius: 5px;
-    box-sizing: border-box;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-}
-
-/* Calendrier */
-.banner-calendar {
-    background-image: url("../../assets/img/banners/banner-calendar.png");
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: 100%;
-    height: 400px;
-    color: var(--primary-color);
-    position: relative;
-    /* margin-top: 40px; */
-}
+} */
 
 .button-go-to {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 40px;
+    /* margin-bottom: 20px; */
 }
 
-/* Galerie */
-.banner-gallery {
-    background-image: url("../../assets/img/banners/banner-gallery.png");
-    background-size: cover;
-    background-position: center;
+/* .button-go-to .button-arrow {
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: 100%;
-    height: 400px;
-    color: var(--primary-color);
-    position: relative;
-}
+    align-items: center;
+} */
 
 .gallery {
     margin: 0 auto;
@@ -418,18 +489,17 @@ section {
     margin-bottom: 20px;
 }
 
-/* Contact */
-.banner-contact {
-    background-image: url("../../assets/img/banners/banner-contact.png");
-    background-size: cover;
-    background-position: center;
+/* Galerie type */
+.gallery-type .grid-item {
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: 100%;
-    height: 400px;
-    color: var(--primary-color);
-    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery-type .grid-item img {
+    width: 300px;
+    height: 200px;
+    margin-bottom: 20px;
 }
 
 .contact {
@@ -465,4 +535,62 @@ section {
 .contact .grid-2 .grid-item .contact-infos {
     text-align: left;
     margin-left: 40px;
+}
+
+.contac {
+
+    /* Aligne le contenu de chaque élément de contact */
+    display: flex;
+    float: left;
+    /* Aligne verticalement l'image et le texte au centre */
+    gap: 0px;
+    /* Espace entre l'icône et le texte */
+}
+
+/* Cible le lien de contact */
+.contact-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--black-color);
+}
+
+/* Cible l'icône dans le contact */
+.contact-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info p:first-of-type {
+    text-align: left;
+    font-weight: bold;
+    margin: 0;
+}
+
+.contact-info p:last-of-type {
+    text-align: left;
+    color: var(--gray-color);
+    margin-left: 0;
+}
+
+.scrollTop {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    opacity: 0;
+    transition: all 1s;
+    z-index: 999;
+}
+
+.scrollTop.visible {
+    opacity: 1;
+}
+
+.flecheTop {
+    height: 30px;
 }

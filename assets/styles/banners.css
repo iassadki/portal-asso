@@ -1,0 +1,158 @@
+/* **************************** */
+/* Bannieres */
+/* **************************** */
+
+/* Super Admin */
+.banner-super-admin {
+    background-image: url('{{ asset("img/banners/banner-super-admin.png") }}');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+/* Accueil */
+.banner-home {
+    /* background-image: url('../img/banners/banner-home.png'); */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+/* Événements */
+.banner-event {
+    background-image: url("../../public/img/banners/banner-event.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+    /* margin-top: 40px; */
+}
+
+/* Creation Evenement */
+.banner-events-creation {
+    background-image: url("../../public/img/banners/banner-add-event.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+/* Calendrier */
+.banner-calendar {
+    background-image: url("../../public/img/banners/banner-calendar.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+    /* margin-top: 40px; */
+}
+
+/* Galerie */
+.banner-gallery {
+    background-image: url("../../public/img/banners/banner-gallery.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+/* Contact */
+.banner-contact {
+    background-image: url("../../public/img/banners/banner-contact.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+/* Rubrique a modifier */
+.banner-rubrics-change {
+    background-image: url("../../public/img/banners/banner-rubrics-change.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+/* Logo a modifier */
+.banner-logo-change {
+    background-image: url("../../public/img/banners/banner-logo-change.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+/* Couleurs a modifier */
+.banner-colors-change {
+    background-image: url("../../public/img/banners/banner-colors-change.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}
+
+.banner-account {
+    background-image: url("../../public/img/banners/banner-account.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 400px;
+    color: var(--primary-color);
+    position: relative;
+}

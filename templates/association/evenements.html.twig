@@ -11,7 +11,67 @@
         }
     </style>
 
-    <h1>Tous les evenements</h1>
+{{ include('association/header.html.twig', {
+    'paiement': paiement,
+    'message': message,
+    'evenement': evenement,
+    'galerie': galerie
+}) }}
+    <section class="banner-events">
+        <!-- Menu latéral -->
+        <div id="sidebar" class="sidebar">
+            <a href="{{ path('association_admin',{'name': name}) }}">
+                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
+                        alt="Icône gauche"></span>
+                <span class="sidebar-text">Admin</span>
+                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
+                        alt="Icône droite"></span>
+            </a>
+            <a href="{{ path('association_personalisation_1',{'name': name}) }}">
+                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
+                        alt="Icône gauche"></span>
+                <span class="sidebar-text">Ajouter une rubrique</span>
+                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
+                        alt="Icône droite"></span>
+            </a>
+            <a href="{{ path('association_personalisation_2',{'name': name}) }}">
+                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
+                        alt="Icône gauche"></span>
+                <span class="sidebar-text">Modifier le logo</span>
+                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
+                        alt="Icône droite"></span>
+            </a>
+            <a href="{{ path('association_personalisation_3',{'name': name}) }}">
+                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
+                        alt="Icône gauche"></span>
+                <span class="sidebar-text">Modifier les couleurs</span>
+                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
+                        alt="Icône droite"></span>
+            </a>
+            <button id="button-sidebar">
+                <a class="button-link" href="calendrier.html">Me déconnecter</a>
+                <img class="right-arrow normal" src="{{ asset('icons/orange/right-arrow.svg')}}" alt="Right Arrow">
+                <img class="right-arrow hover" src="{{ asset('icons/white/right-arrow.svg')}}" alt="Right Arrow Hover">
+            </button>
+        </div>
+    </section>
+
+    <section class="introduction">
+        <h2>Bienvenue sur PortalAsso</h2>
+        <p class="text-introduction">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
+            hendrerit nec, congue id mauris. Cras id
+            rutrum odio, sed maximus ex. Ut condimentum a felis vitae blandit. Pellentesque felis nibh, hendrerit quis
+            sem eget,
+            lobortis varius tortor. Morbi consequat ligula erat, in interdum lectus volutpat ac. Nullam viverra urna
+            tempus turpis
+            interdum, in eleifend ligula feugiat. Duis fermentum lectus consectetur mauris vestibulum efficitur. Cras
+            sagittis
+            mauris ipsum, sit amet tempus tortor venenatis a. In suscipit venenatis venenatis. Lorem ipsum dolor sit
+            amet,
+            consectetur adipiscing elit. Phasellus congue eros lorem, sed eleifend elit vehicula eget. In rutrum, lectus
+            a egestas
+            rutrum, tortor odio viverra eros, et scelerisque lorem libero id lectus.</p>
+    </section>
     <a href="{{ path('association_evenements_new', {'name': name}) }}">Ajouter un evenement</a>
 
     <table class="table">
@@ -50,5 +110,55 @@
                 </tr>
             {% endfor %}
         </tbody>
+
+            <section class="events">
+        <div class="add-more">
+            <a href="evenement-creation.html"><img src="assets/icons/orange/add-more.svg" alt="Add More"></a>
+        </div>
+        <div class="grid-3">
+            <div class="grid-item">
+                <img class="image-event" src="assets/img/test_image_grid.jpeg" alt="assets/img/test_image_grid1">
+                <h3 class="event-title">Titre evenement</h3>
+                <p class="event-date">Date : 17/06/2024</p>
+                <div class="bottom-border"></div>
+                <p class="event-info">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
+                    hendrerit nec, congue id mauris.</p>
+                <p class="event-place">Paris, 75014</p>
+                <button id="button-basic">
+                    <a class="button-link" href="">Participer</a>
+                    <img class="right-arrow normal" src="assets/icons/blue/right-arrow.svg" alt="Right Arrow">
+                    <img class="right-arrow hover" src="assets/icons/white/right-arrow.svg" alt="Right Arrow">
+                </button>
+            </div>
+            <div class="grid-item">
+                <img class="image-event" src="assets/img/test_image_grid.jpeg" alt="test_image_grid2">
+                <h3 class="event-title">Titre evenement</h3>
+                <p class="event-date">Date : 17/06/2024</p>
+                <div class="bottom-border"></div>
+                <p class="event-info">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
+                    hendrerit nec, congue id mauris.</p>
+                <p class="event-place">Paris, 75014</p>
+                <button id="button-basic">
+                    <a class="button-link" href="">Participer</a>
+                    <img class="right-arrow normal" src="assets/icons/blue/right-arrow.svg" alt="Right Arrow">
+                    <img class="right-arrow hover" src="assets/icons/white/right-arrow.svg" alt="Right Arrow">
+                </button>
+            </div>
+            <div class="grid-item">
+                <img class="image-event" src="assets/img/test_image_grid.jpeg" alt="test_image_grid3">
+                <h3 class="event-title">Titre evenement</h3>
+                <p class="event-date">Date : 17/06/2024</p>
+                <div class="bottom-border"></div>
+                <p class="event-info">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
+                    hendrerit nec, congue id mauris.</p>
+                <p class="event-place">Paris, 75014</p>
+                <button id="button-basic">
+                    <a class="button-link" href="">Participer</a>
+                    <img class="right-arrow normal" src="assets/icons/blue/right-arrow.svg" alt="Right Arrow">
+                    <img class="right-arrow hover" src="assets/icons/white/right-arrow.svg" alt="Right Arrow">
+                </button>
+            </div>
+        </div>
+    </section>
     </table>
 {% endblock %}

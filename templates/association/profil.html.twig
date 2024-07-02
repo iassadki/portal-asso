@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+{# {{ include('association/header.html.twig', {
+    'paiement': paiement,
+    'message': message,
+    'evenement': evenement,
+    'galerie': galerie
+}) }} #}
+
+    <h1>Votre profil</h1>
+    <p>Vous êtes connecté en tant que {{ user.nom }} {{ user.prenom }}</p>
+    <h2>Members of {{ name }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Modifier</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ user.nom }}</td>
+                    <td>{{ user.prenom }}</td>
+                    <td>{{ user.email }}</td>
+                    {# <td>
+                        <ul>
+                            <li><a href="{{ path('association_admin_editUser', {'name' : name, 'id' : user.id}) }}">Modifier</a></li>
+                        </ul>
+                    </td> #}
+                </tr>
+        </tbody>
+    </table>
+
+    <h1>Toutes vos participations aux evenements</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Evenement</th>
+                <th>Date</th>
+                <th>Heure</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evenement in evenements %}
+                <tr>
+                    <td>{{ evenement.nom }}</td>
+                    <td>{{ evenement.description }}</td>
+                    <td>{{ evenement.lieu }}</td>
+                     {% if evenement.dateDebut|date('Y-m-d') == evenement.dateFin|date('Y-m-d') %}
+                        <td>{{ evenement.dateDebut|date('Y-m-d') }}</td>
+                    {% else %}
+                        <td>{{ evenement.dateDebut|date('Y-m-d') }} - {{ evenement.dateFin|date('Y-m-d') }}</td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+        </tbody>
+
+        <a href="{{ path('logout')}}">Se deconnecter</a>
+    
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        console.log('Hello from admin dashboard');
+    </script>
+{% endblock %}

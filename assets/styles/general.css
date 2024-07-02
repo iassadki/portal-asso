@@ -31,16 +31,39 @@ body {
     color: #333;
 }
 
-/* Styles pour les liens */
+/* Liens */
 a {
     font-family: var(--primary-font);
     color: #007bff;
     text-decoration: none;
+    position: relative;
+    display: inline-block;
 }
 
-a:hover {
-    text-decoration: underline;
-    color: var(--third-color);
+a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--third-color);
+    bottom: -2px;
+    left: 0;
+    visibility: hidden;
+    transition: visibility 0s, width 0.3s;
+}
+
+a:hover::after {
+    visibility: visible;
+    width: 100%;
+}
+
+.button-link::after {
+    content: none;
+}
+
+.nav-link.active::after {
+    visibility: visible;
+    width: 100%;
 }
 
 /* Styles pour les titres */
@@ -76,6 +99,10 @@ input {
     border-radius: 5px;
 }
 
+input[type="checkbox"] {
+    display: none;
+}
+
 /* Labels pour les inputs des formulaires */
 section label {
     font-family: var(--primary-font);
@@ -85,6 +112,12 @@ section label {
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 5px;
+}
+
+section a {
+    /* text-align: center; */
+    align-items: center;
+    justify-content: center;
 }
 
 /* Styles pour les conteneurs */
@@ -101,30 +134,120 @@ section label {
     text-align: center;
 }
 
-/* Styles pour les boutons */
-#button {
-    margin-top: 20px;
-}
+/* Container au centre Creation compte/connexion */
 
-#button button {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    padding: 10px 20px;
+
+/* Button basic */
+#button-basic {
+    margin: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 10px;
+    padding-right: 20px;
     border: solid 2px var(--secondary-color);
     border-radius: 30px;
     cursor: pointer;
     background-color: var(--white-color);
     color: var(--secondary-color);
-    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
 }
 
-#button button:hover {
+#button-basic:hover {
     background-color: var(--secondary-color);
-    border: solid 2px var(--secondary-color);
     color: var(--white-color);
-    animation: pulse 0.5s infinite alternate;
+}
+
+#button-basic .button-link {
+    text-decoration: none;
+    color: var(--secondary-color);
+    margin-left: 20px;
+}
+
+#button-basic:hover .button-link {
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+#button-basic .right-arrow {
+    width: 20px;
+    height: 20px;
+}
+
+#button-basic .right-arrow.normal {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+#button-basic .right-arrow.hover {
+    display: none;
+}
+
+#button-basic:hover .right-arrow.normal {
+    display: none;
+}
+
+#button-basic:hover .right-arrow.hover {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+/* Bouton sidebar */
+#button-sidebar {
+    margin: auto;
+    /* margin-bottom: 10px; */
+    padding: 10px;
+    border: solid 2px var(--third-color);
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+#button-sidebar:hover {
+    background-color: var(--third-color);
+    color: var(--white-color);
+}
+
+#button-sidebar a {
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+#button-sidebar .right-arrow {
+    width: 20px;
+    height: 30px;
+    /* margin-left: 30px; */
+}
+
+#button-sidebar .right-arrow.normal {
+    display: inline-block;
+    /* Affiche l'image normale par défaut */
+}
+
+#button-sidebar .right-arrow.hover {
+    display: none;
+    /* Cache l'image pour le survol initialement */
+}
+
+#button-sidebar:hover .right-arrow.normal {
+    display: none;
+    /* Cache l'image normale lorsque le bouton est survolé */
+}
+
+#button-sidebar:hover .right-arrow.hover {
+    display: inline-block;
+    /* Affiche l'image pour le survol lorsque le bouton est survolé */
 }
 
 /* Styles pour les boutons (Bouton avec flèche) */
@@ -152,61 +275,101 @@ section label {
     background-color: #e0f7ff;
 }
 
-/* Styles pour les boutons (Bouton couleur primaire) */
+/* Styles pour le bouton couleur primaire */
 #button-primary {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 100px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: solid 2px var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#button-primary:hover {
+    background-color: var(--white-color);
+    border: solid 2px var(--primary-color);
+    color: var(--primary-color);
+}
+
+#button-primary .button-link {
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+#button-primary:hover .button-link {
+    color: var(--primary-color);
+}
+
+/* Styles pour les boutons (Bouton couleur tertiaire) */
+#button-third {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 100px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: solid 2px var(--third-color);
+    background-color: var(--third-color);
+    color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#button-third:hover {
+    background-color: var(--white-color);
+    border: solid 2px var(--third-color);
+    color: var(--white-color);
+}
+
+#button-third .button-link {
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+#button-third:hover .button-link {
+    color: var(--third-color);
+}
+
+/* Bouton de la Sidebar */
+#button-sidebar {
     margin-top: 20px;
 }
 
-#button-primary button {
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 16px;
+#button-sidebar button {
+    margin-top: 20px;
+    font-size: 18px;
     font-weight: 500;
-    text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 10px 100px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border: solid 2px var(--third-color);
+    border-radius: 30px;
     cursor: pointer;
-    /* met une ombre au bouton */
-    border: solid 2px var(--primary-color);
     background-color: var(--primary-color);
     color: var(--white-color);
     transition: background-color 0.3s ease;
 }
 
-#button-primary button:hover {
-    background-color: var(--white-color);
-    border: solid 2px var(--primary-color);
-    color: var(--primary-color);
-    animation: pulse 0.5s infinite alternate;
-}
-
-/* Styles pour les boutons (Bouton couleur tertiaire) */
-#button-third {
-    margin-top: 20px;
-}
-
-#button-third button {
-    width: 100%;
-    margin-bottom: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 10px 100px;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 5px 5px 0 rgba(128, 128, 128, 0.4);
-    border: solid 2px var(--third-color);
+#button-sidebar button:hover {
     background-color: var(--third-color);
-    color: var(--white-color);
-    transition: background-color 0.3s ease;
-}
-
-#button-third button:hover {
-    background-color: var(--white-color);
     border: solid 2px var(--third-color);
-    color: var(--third-color);
+    color: var(--white-color);
     animation: pulse 0.5s infinite alternate;
 }
 
@@ -218,6 +381,18 @@ section .add-more {
 }
 
 section .add-more img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+section .go-back {
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+section .go-back img {
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -243,6 +418,7 @@ section .return-arrow img {
     gap: 20px;
     justify-content: center;
     text-align: center;
+    align-items: flex-start;
 }
 
 /* Grid de 2 en CSS */
@@ -266,17 +442,11 @@ section .return-arrow img {
     text-align: center;
 }
 
-.grid-item img {
-    display: block;
-    margin: 0 auto;
-    width: 150px;
-}
-
 /* Titres de section */
-.section-title {
+/* .section-title {
     text-align: center;
     margin-bottom: 60px;
-}
+} */
 
 /* Formulaire */
 .contact-form {
@@ -285,9 +455,10 @@ section .return-arrow img {
 
 .contact-form input[type="text"],
 .contact-form input[type="email"],
+.contact-form select,
 .contact-form textarea {
     /* met une bordure aux elements du formulaire mais que au niveau de bas */
-    width: 95%;
+    width: 100%;
     border: none;
     border-bottom: 2px solid var(--grey2-color);
     padding: 10px;
@@ -297,31 +468,55 @@ section .return-arrow img {
     transition: background-color 0.3s ease;
 }
 
+.contact-form option {
+    color: var(--grey2-color);
+}
+
 .contact-form textarea {
-    /* a faire en  carré */
     height: 200px;
     resize: none;
+    border: solid 2px var(--grey2-color);
 }
 
 /* Choix de fichier */
 .file-choose {
     width: 100%;
     height: 70px;
+    /* margin-right: 30px; */
     border: 2px solid var(--grey-color);
-    padding: 10px 0px 0px 0px;
+    padding: 10px;
     font-size: 16px;
-    font-family: var(--primary-font);
-    transition: background-color 0.3s ease;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--grey2-color);
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.file-choose img {
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+    cursor: pointer;
 }
 
 .file-choose label {
-    margin-top: 10px;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    /* display: flex; */
+    margin: 0;
+    cursor: pointer;
+}
+
+.file-choose span {
+    white-space: nowrap;
     color: var(--grey2-color);
     cursor: pointer;
+}
+
+.file-choose input[type="file"] {
+    display: none;
 }
 
 .limit-files {
@@ -332,7 +527,7 @@ section .return-arrow img {
     margin-bottom: 30px;
 }
 
-/* Rond Setp (Etapes) */
+/* Rond Step (Etapes) */
 .step-container {
     display: flex;
     justify-content: center;
@@ -414,4 +609,54 @@ section .return-arrow img {
     border: 1px solid #ccc;
     border-radius: 4px;
     text-align: center;
+}
+
+/* event form */
+.form-creation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+}
+
+/* centrer les elements du formulaire de la section class.form-creation */
+.form-creation form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-creation form input[type="text"],
+.form-creation form input[type="date"],
+.form-creation form input[type="time"],
+.form-creation form input[type="number"],
+.form-creation form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.scrollTop {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    opacity: 0;
+    transition: all 1s;
+    z-index: 999;
+}
+
+.scrollTop.visible {
+    opacity: 1;
+}
+
+.flecheTop {
+    font-size: 30px;
 }

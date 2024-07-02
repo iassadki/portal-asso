@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Association index{% endblock %}
+{% block title %}{{ name }}{% endblock %}
 {% block body %}
     <style>
         .flex-ul {
@@ -11,31 +11,94 @@
         }
     </style>
 
-    <h1>Association index</h1>
-
+    <a href="#site-body" class="scrollTop"><img class="flecheTop" src="{{ asset('icons/orange/up-arrow.svg')}}"/></a>
     <header>
-        <ul class="flex-ul">
-            <li><a href="{{ path('home') }}">Accueil</a></li>
+    <nav>
+            <a href="index.html" class="logo"><img src="{{ asset('logos/logo.png')}}" alt="Menu Icon"></a>
+            <ul class="nav-menu">
+            <li><a href="{{ path('home') }}" class="nav-link">Accueil</a></li>
             {% if paiement is same as(true) %}
-                <li><a href="{{ path('home') }}">Paiement</a></li>
+                <li><a href="{{ path('home') }}" class="nav-link">Paiement</a></li>
             {% endif %}
             {% if evenement is same as(true) %}
-                <li><a href="{{ path('association_evenements', {'name' : name}) }}">Evenement</a></li>
+                <li><a href="{{ path('association_evenements', {'name' : name}) }}" class="nav-link">Evenement</a></li>
                 <li><a href="{{ path('home') }}">Calendrier</a></li>
             {% endif %}
             {% if message is same as(true) %}
-                <li><a href="{{ path('home') }}">Contact</a></li>
+                <li><a href="{{ path('home') }}" class="nav-link">Contact</a></li>
             {% endif %}
             {% if galerie is same as(true) %}
-                <li><a href="{{ path('home') }}">Galerie</a></li>
+                <li><a href="{{ path('home') }}" class="nav-link">Galerie</a></li>
             {% endif %}
+            </ul>
+           
+            <ul class="left-icons-nav">
+                <li><a href="{{ path('association_profil', {'name' : name}) }}"><img src="{{ asset('icons/black/person-circle.svg')}}" alt="User Icon"></a></li> 
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_PROPRIETAIRE')%}
-                <li><a href="{{ path('association_admin',{'name': name}) }}">Admin</a></li>
-                <li><a href="{{ path('association_personalisation_1',{'name': name}) }}">Ajouter/Supprimer une rubrique</a></li>
-                <li><a href="{{ path('association_personalisation_2',{'name': name}) }}">Changer le logo</a></li>
-                <li><a href="{{ path('association_personalisation_3',{'name': name}) }}">Changer les couleurs</a></li>
+                <li><a href="javascript:void(0);" id="menu-icon"><img src="{{ asset('icons/black/lateral-menu.svg')}}" alt="Menu Icon"></a></li>
             {% endif %}
-        </ul>
+            </ul>
+    </nav>
     </header>
 
+    <section class="banner-home">
+    <img src="{{ asset('img/banners/banner-home.png')}}" alt="Banniere Home">
+        <!-- Menu latéral -->
+        <div id="sidebar" class="sidebar">
+            <a href="{{ path('association_admin',{'name': name}) }}">
+                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
+                        alt="Icône gauche"></span>
+                <span class="sidebar-text">Admin</span>
+                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
+                        alt="Icône droite"></span>
+            </a>
+            <a href="{{ path('association_personalisation_1',{'name': name}) }}">
+                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
+                        alt="Icône gauche"></span>
+                <span class="sidebar-text">Ajouter une rubrique</span>
+                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
+                        alt="Icône droite"></span>
+            </a>
+            <a href="{{ path('association_personalisation_2',{'name': name}) }}">
+                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
+                        alt="Icône gauche"></span>
+                <span class="sidebar-text">Modifier le logo</span>
+                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
+                        alt="Icône droite"></span>
+            </a>
+            <a href="{{ path('association_personalisation_3',{'name': name}) }}">
+                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
+                        alt="Icône gauche"></span>
+                <span class="sidebar-text">Modifier les couleurs</span>
+                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
+                        alt="Icône droite"></span>
+            </a>
+            <button id="button-sidebar">
+                <a class="button-link" href="calendrier.html">Me déconnecter</a>
+                <img class="right-arrow normal" src="{{ asset('icons/orange/right-arrow.svg')}}" alt="Right Arrow">
+                <img class="right-arrow hover" src="{{ asset('icons/white/right-arrow.svg')}}" alt="Right Arrow Hover">
+            </button>
+        </div>
+    </section>
+
+    <section class="introduction">
+        <h2>Bienvenue sur PortalAsso</h2>
+        <p class="text-introduction">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
+            hendrerit nec, congue id mauris. Cras id
+            rutrum odio, sed maximus ex. Ut condimentum a felis vitae blandit. Pellentesque felis nibh, hendrerit quis
+            sem eget,
+            lobortis varius tortor. Morbi consequat ligula erat, in interdum lectus volutpat ac. Nullam viverra urna
+            tempus turpis
+            interdum, in eleifend ligula feugiat. Duis fermentum lectus consectetur mauris vestibulum efficitur. Cras
+            sagittis
+            mauris ipsum, sit amet tempus tortor venenatis a. In suscipit venenatis venenatis. Lorem ipsum dolor sit
+            amet,
+            consectetur adipiscing elit. Phasellus congue eros lorem, sed eleifend elit vehicula eget. In rutrum, lectus
+            a egestas
+            rutrum, tortor odio viverra eros, et scelerisque lorem libero id lectus.</p>
+    </section>
+
+{% include 'footer.html.twig' %}
+
 {% endblock %}
+

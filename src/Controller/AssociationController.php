@@ -46,6 +46,24 @@ class AssociationController extends AbstractController
         ]);
     }
 
+    public function header(string $name, AssociationRepository $associationRepository): Response
+    {
+        $association = $associationRepository->findOneBy(['nom' => $name]);
+        
+        $paiement = $association->isPaiementCheck();
+        $message = $association->isMessageCheck();
+        $evenement = $association->isEvenementCheck();
+        $galerie = $association->isGalerieCheck();
+
+        return $this->render('association/header.html.twig', [
+            'associations' => $association,
+            'paiement' => $paiement,
+            'message' => $message,
+            'evenement' => $evenement,
+            'galerie' => $galerie,
+        ]);
+    }
+
     #[Route('/{name}/admin', name: 'admin', methods: ['GET'])]
     public function admin(string $name, AssociationRepository $associationRepository, UserRepository $userRepository): Response
     {
@@ -350,10 +368,17 @@ class AssociationController extends AbstractController
 
     #[Route(path: '/{name}/evenements/', name: 'evenements')]
     public function evenements (string $name, 
-        EvenementRepository $evenementRepository
+        EvenementRepository $evenementRepository,
+        AssociationRepository $associationRepository
     ): Response
     {
         $evenement = $evenementRepository->findAll();
+        $association = $associationRepository->findOneBy(['nom' => $name]);
+
+        $paiement = $association->isPaiementCheck();
+        $message = $association->isMessageCheck();
+        $events = $association->isEvenementCheck();
+        $galerie = $association->isGalerieCheck();
 
         foreach($evenement as $event){
             if($event->getProprietaire()->getAsso()->getId() == $this->getUser()->getAsso()->getId()){
@@ -367,7 +392,11 @@ class AssociationController extends AbstractController
 
         return $this->render('association/evenements.html.twig', [
             'evenements' => $evenements,
-            'name' => $name
+            'name' => $name,
+            'paiement' => $paiement,
+            'message' => $message,
+            'evenement' => $events,
+            'galerie' => $galerie
         ]);
 
     }
@@ -478,6 +507,34 @@ class AssociationController extends AbstractController
         return $this->redirectToRoute('association_evenements', [
             'name' => $name,
             'participate' => $participate
+        ]);
+    }
+
+    #[Route(path: '/{name}/profil', name: 'profil')]
+    public function profil (string $name, EvenementRepository $evenementRepository): Response
+    {
+        
+        $user = $this->getUser();
+        $evenement = $evenementRepository->findAll();
+
+        foreach($evenement as $event){
+           if(in_array($user->getId(), $event->getListeUsers())){
+               $evenements[] = $event;
+           }
+        }
+
+        return $this->render('association/profil.html.twig', [
+            'name' => $name,
+            'user' => $user,
+            'evenements' => $evenements
+        ]);
+    }
+
+    #[Route(path: '/{name}/calendar', name: 'calendar')]
+    public function calendar(string $name): Response
+    {
+        return $this->render('association/calendar.html.twig', [
+            'name' => $name
         ]);
     }
 
