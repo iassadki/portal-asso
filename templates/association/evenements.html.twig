@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'association/base_association.html.twig' %}
 
 {% block title %}Evenements{% endblock %}
 {% block body %}
@@ -10,13 +10,6 @@
             gap: 10px; /* Adds space between items */
         }
     </style>
-
-{{ include('association/header.html.twig', {
-    'paiement': paiement,
-    'message': message,
-    'evenement': evenement,
-    'galerie': galerie
-}) }}
     <section class="banner-events">
         <!-- Menu latéral -->
         <div id="sidebar" class="sidebar">

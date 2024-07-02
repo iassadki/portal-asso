@@ -29,39 +29,21 @@ class AssociationController extends AbstractController
     #[Route('/{name}', name: 'home', methods: ['GET'])]
     public function index(string $name, AssociationRepository $associationRepository): Response
     {
-        $association = $associationRepository->findOneBy(['nom' => $name]);
-        
-        $paiement = $association->isPaiementCheck();
-        $message = $association->isMessageCheck();
-        $evenement = $association->isEvenementCheck();
-        $galerie = $association->isGalerieCheck();
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
-        return $this->render('association/index.html.twig', [
-            'associations' => $association,
-            'paiement' => $paiement,
-            'message' => $message,
-            'evenement' => $evenement,
-            'galerie' => $galerie,
-            'name' => $name
-        ]);
+        return $this->render('association/index.html.twig', array_merge($headerVariables, ['name' => $name]));
     }
 
-    public function header(string $name, AssociationRepository $associationRepository): Response
+    public function getHeaderVariables(string $name, AssociationRepository $associationRepository): array
     {
         $association = $associationRepository->findOneBy(['nom' => $name]);
-        
-        $paiement = $association->isPaiementCheck();
-        $message = $association->isMessageCheck();
-        $evenement = $association->isEvenementCheck();
-        $galerie = $association->isGalerieCheck();
 
-        return $this->render('association/header.html.twig', [
-            'associations' => $association,
-            'paiement' => $paiement,
-            'message' => $message,
-            'evenement' => $evenement,
-            'galerie' => $galerie,
-        ]);
+        return [
+            'paiement' => $association->isPaiementCheck(),
+            'message' => $association->isMessageCheck(),
+            'evenement' => $association->isEvenementCheck(),
+            'galerie' => $association->isGalerieCheck(),
+        ];
     }
 
     #[Route('/{name}/admin', name: 'admin', methods: ['GET'])]
@@ -70,13 +52,12 @@ class AssociationController extends AbstractController
 
         $asso = $associationRepository->findOneBy(['nom' => $name]);
         $users = $userRepository->findBy(['asso' => $asso->getId()]);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         //afficher les utilisateurs de l'association
 
-        return $this->render('association/admin.html.twig', [
-            'name' => $name,
-            'users' => $users
-        ]);
+        return $this->render('association/admin.html.twig',
+            array_merge($headerVariables, ['name' => $name, 'users' => $users]));
     }
 
     #[Route('/{name}/admin/newUser', name: 'admin_newUser', methods: ['GET'])]
@@ -92,6 +73,7 @@ class AssociationController extends AbstractController
         $form = $this->createForm(AdminUserType::class, $user);
         $form->handleRequest($request);
         $asso = $associationRepository->findOneBy(['nom' => $name]);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -120,10 +102,10 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_admin', ['name' => $name]);
         }
 
-        return $this->render('association/new.html.twig', [
+        return $this->render('association/new.html.twig', array_merge($headerVariables, [
             'name' => $name,
             'form' => $form,
-        ]);
+        ]));
     }
 
     #[Route('/{name}/admin/editUser/{id}', name: 'admin_editUser', methods: ['GET'])]
@@ -140,6 +122,7 @@ class AssociationController extends AbstractController
         $form = $this->createForm(AdminUserType::class, $user);
         $form->handleRequest($request);
         $asso = $associationRepository->findOneBy(['nom' => $name]);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -161,11 +144,11 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_admin', ['name' => $name]);
         }
 
-        return $this->render('association/edit.html.twig', [
+        return $this->render('association/edit.html.twig', array_merge($headerVariables, [
             'name' => $name,
             'form' => $form,
             'user' => $user,
-        ]);
+        ]));
     }
 
     #[Route('/{name}/admin/deleteUser/{id}', name: 'admin_deleteUser', methods: ['GET'])]
@@ -178,6 +161,7 @@ class AssociationController extends AbstractController
     {
         $user = $userRepository->findOneBy(['id' => $id]);
         $asso = $associationRepository->findOneBy(['nom' => $name]);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         $asso->removeListeUsers($user->getId());
 
@@ -190,7 +174,7 @@ class AssociationController extends AbstractController
         $entityManager->remove($user);
         $entityManager->flush();
 
-        return $this->redirectToRoute('association_admin', ['name' => $name]);
+        return $this->redirectToRoute('association_admin', array_merge($headerVariables, ['name' => $name]));
     }
 
     #[Route(path: '/{name}/personalisation/1', name: 'personalisation_1')]
@@ -200,6 +184,7 @@ class AssociationController extends AbstractController
 
         $form = $this->createForm(ConfigurationWebsiteType::class);
         $form->handleRequest($request);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $asso->setPaiementCheck($form->get('paiement')->getData());
@@ -213,10 +198,10 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_home', ['name' => $name]);
         }
 
-        return $this->render('association/personalisation1.html.twig',[
+        return $this->render('association/personalisation1.html.twig', array_merge($headerVariables, [
             'form' => $form,
             'name' => $name,
-        ]);
+        ]));
     }
 
     #[Route(path: '/{name}/personalisation/2', name: 'personalisation_2')]
@@ -226,6 +211,7 @@ class AssociationController extends AbstractController
         $assoName = $asso->getNom();
         $form = $this->createForm(LogoType::class);
         $form->handleRequest($request);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $logo = $form->get('logo')->getData();
@@ -255,10 +241,10 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_home', ['name' => $name]);
         }    
 
-        return $this->render('association/personalisation2.html.twig',[
+        return $this->render('association/personalisation2.html.twig', array_merge($headerVariables, [
             'form' => $form,
             'name' => $assoName,
-        ]);
+        ]));
     }
 
     #[Route(path: '/{name}/personalisation/3', name: 'personalisation_3')]
@@ -266,6 +252,8 @@ class AssociationController extends AbstractController
     {
         $asso = $associationRepository->findOneBy(['nom' => $name]);
         $assoName = $asso->getNom();
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+
         
         $form = $this->createForm(ColorType::class);
         $form->handleRequest($request);
@@ -307,21 +295,24 @@ class AssociationController extends AbstractController
         $entityManager->flush();
 
     
-        return $this->render('association/personalisation3.html.twig',[
+        return $this->render('association/personalisation3.html.twig', array_merge($headerVariables, [
             'colorForm' => $form,
             'name' => $assoName,
-        ]);
+        ]));
     }
 
     #[Route(path: '/{name}/evenements/new', name: 'evenements_new')]
     public function newEvenement (string $name, 
         Request $request, 
         EntityManagerInterface $entityManager,
+        AssociationRepository $associationRepository
     ): Response
     {
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $img = $form->get('image')->getData();
@@ -360,10 +351,7 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_evenements', ['name' => $name]);
         }
 
-        return $this->render('association/newEvenement.html.twig', [
-            'form' => $form,
-            'name' => $name
-        ]);
+        return $this->render('association/newEvenement.html.twig', array_merge($headerVariables, ['name' => $name, 'form' => $form]));
     }
 
     #[Route(path: '/{name}/evenements/', name: 'evenements')]
@@ -373,12 +361,7 @@ class AssociationController extends AbstractController
     ): Response
     {
         $evenement = $evenementRepository->findAll();
-        $association = $associationRepository->findOneBy(['nom' => $name]);
-
-        $paiement = $association->isPaiementCheck();
-        $message = $association->isMessageCheck();
-        $events = $association->isEvenementCheck();
-        $galerie = $association->isGalerieCheck();
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         foreach($evenement as $event){
             if($event->getProprietaire()->getAsso()->getId() == $this->getUser()->getAsso()->getId()){
@@ -390,14 +373,7 @@ class AssociationController extends AbstractController
             }
         }
 
-        return $this->render('association/evenements.html.twig', [
-            'evenements' => $evenements,
-            'name' => $name,
-            'paiement' => $paiement,
-            'message' => $message,
-            'evenement' => $events,
-            'galerie' => $galerie
-        ]);
+        return $this->render('association/evenements.html.twig', array_merge($headerVariables, ['name' => $name, 'evenements' => $evenements]));
 
     }
 
@@ -406,12 +382,14 @@ class AssociationController extends AbstractController
         Request $request, 
         EntityManagerInterface $entityManager,
         EvenementRepository $evenementRepository,
+        AssociationRepository $associationRepository,
         int $id
     ): Response
     {
         $evenement = $evenementRepository->findOneBy(['id' => $id]);
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $img = $form->get('image')->getData();
@@ -450,37 +428,38 @@ class AssociationController extends AbstractController
             return $this->redirectToRoute('association_home', ['name' => $name]);
         }
 
-        return $this->render('association/editEvenement.html.twig', [
-            'form' => $form,
-            'name' => $name,
-            'evenement' => $evenement
-        ]);
+        return $this->render('association/editEvenement.html.twig', 
+            array_merge($headerVariables, ['name' => $name, 'form' => $form, 'evenement' => $evenement]));
     }
 
     #[Route(path: '/{name}/evenements/delete/{id}', name: 'evenements_delete')]
     public function deleteEvenement (string $name, 
         EntityManagerInterface $entityManager,
         EvenementRepository $evenementRepository,
+        AssociationRepository $associationRepository,
         int $id
     ): Response
     {
         $evenement = $evenementRepository->findOneBy(['id' => $id]);
-
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
         $entityManager->remove($evenement);
         $entityManager->flush();
 
-        return $this->redirectToRoute('association_home', ['name' => $name]);
+        return $this->redirectToRoute('association_home', array_merge($headerVariables, ['name' => $name]));
     }
 
     #[Route(path: '/{name}/evenements/add/{id}', name: 'evenements_add')]
     public function addEvenement (string $name, 
         EntityManagerInterface $entityManager,
         EvenementRepository $evenementRepository,
+        AssociationRepository $associationRepository,
         int $id
     ): Response
     {
         //si l'utilisateur est déjà inscrit à l'événement, le retirer de la liste des participants
         $evenement = $evenementRepository->findOneBy(['id' => $id]);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+
 
         $participate = in_array($this->getUser()->getId(), $evenement->getListeUsers());
 
@@ -504,18 +483,18 @@ class AssociationController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('association_evenements', [
-            'name' => $name,
-            'participate' => $participate
-        ]);
+        return $this->redirectToRoute('association_evenements', 
+            array_merge($headerVariables, ['name' => $name, 'participate' => $participate]));
     }
 
     #[Route(path: '/{name}/profil', name: 'profil')]
-    public function profil (string $name, EvenementRepository $evenementRepository): Response
+    public function profil (string $name, EvenementRepository $evenementRepository, AssociationRepository $associationRepository): Response
     {
         
         $user = $this->getUser();
         $evenement = $evenementRepository->findAll();
+
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         foreach($evenement as $event){
            if(in_array($user->getId(), $event->getListeUsers())){
@@ -523,19 +502,19 @@ class AssociationController extends AbstractController
            }
         }
 
-        return $this->render('association/profil.html.twig', [
-            'name' => $name,
-            'user' => $user,
-            'evenements' => $evenements
-        ]);
+        return $this->render('association/profil.html.twig', array_merge($headerVariables, [
+            'name' => $name, 
+            'evenements' => $evenements, 
+            'user' => $user
+        ]));  ;
     }
 
     #[Route(path: '/{name}/calendar', name: 'calendar')]
-    public function calendar(string $name): Response
+    public function calendar(string $name, AssociationRepository $associationRepository): Response
     {
-        return $this->render('association/calendar.html.twig', [
-            'name' => $name
-        ]);
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+
+        return $this->render('association/calendar.html.twig', array_merge($headerVariables, ['name' => $name]));
     }
 
 }

@@ -1,5 +1,5 @@
 {# templates/booking/calendar.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends 'association/base_association.html.twig' %}
 
 {% block body %}
     {# <a href="{{ path('association_evenements_new') }}">Create new booking</a> #}
@@ -14,7 +14,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const calendarEl = document.getElementById('calendar-holder');
 
-            const calendar = new FullCalendar.Calendar(calendarEl, {
+                const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 editable: true,
                 eventSources: [

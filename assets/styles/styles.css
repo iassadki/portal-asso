@@ -344,9 +344,9 @@ section h2 {
     padding: 40px;
 }
 
-.events .grid-3 {
+/* .events .grid-3 {
     gap: 50px;
-}
+} */
 
 .events .grid-item {
     position: relative;
@@ -490,13 +490,13 @@ section h2 {
 }
 
 /* Galerie type */
-.gallery-type .grid-item {
+.gallery-creation .grid-item {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.gallery-type .grid-item img {
+.gallery-creation .grid-item img {
     width: 300px;
     height: 200px;
     margin-bottom: 20px;

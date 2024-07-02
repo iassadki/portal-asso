@@ -31,6 +31,15 @@ body {
     color: #333;
 }
 
+/* Buger icon */
+#burger-icon {
+    display: none;
+}
+
+#sidebar-mobile {
+    display: none;
+}
+
 /* Liens */
 a {
     font-family: var(--primary-font);
@@ -421,7 +430,7 @@ section .return-arrow img {
     align-items: flex-start;
 }
 
-/* Grid de 2 en CSS */
+/* Grids Desktop */
 .grid-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -441,12 +450,6 @@ section .return-arrow img {
 .grid-item {
     text-align: center;
 }
-
-/* Titres de section */
-/* .section-title {
-    text-align: center;
-    margin-bottom: 60px;
-} */
 
 /* Formulaire */
 .contact-form {
@@ -640,7 +643,7 @@ section .return-arrow img {
     border: 1px solid var(--primary-color);
     border-radius: 5px;
     box-sizing: border-box;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     margin-bottom: 20px;
 }
 
@@ -659,4 +662,197 @@ section .return-arrow img {
 
 .flecheTop {
     font-size: 30px;
+}
+
+/* Calendrier */
+
+
+
+/* Styles pour les petits écrans */
+@media screen and (max-width: 768px) {
+
+    /* HEADER-FOOTER.CSS */
+    nav .nav-menu {
+        display: none;
+        /* flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: white;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .left-icons-nav {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    #profile-icon {
+        display: none;
+    }
+
+    #menu-icon {
+        display: none;
+    }
+
+    #burger-icon {
+        display: block;
+    }
+
+    /* Sidebar */
+    #sidebar-mobile {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        /* Largeur de la sidebar ajustée à votre choix */
+        background-color: var(--primary-color);
+        overflow-x: hidden;
+        transition: width 0.3s;
+        padding-top: 60px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: start !important;
+    }
+
+    #sidebar-mobile .grid-2-mobile .grid-item li a {
+        color: var(--white-color);
+        text-align: left;
+    }
+
+    #sidebar-mobile a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--white-color);
+        padding: 10px 15px;
+        position: relative;
+    }
+
+    #sidebar-mobile-icon {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    #sidebar-mobile-text {
+        flex: 1;
+        /* Permet au texte de prendre autant d'espace que possible entre les icônes */
+        text-align: center;
+        /* Centre le texte horizontalement entre les icônes */
+    }
+
+    #sidebar-mobile a img {
+        width: 20px;
+        /* Ajustez la taille des icônes selon vos besoins */
+        height: 20px;
+        vertical-align: middle;
+    }
+
+    #sidebar-mobile .closebtn {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        font-size: 30px;
+        color: var(--white-color);
+        cursor: pointer;
+    }
+
+    .events .grid-1-mobile {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .gallery .grid-1-mobile {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .gallery-creation .grid-1-mobile {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .gallery-type .grid-1-mobile {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .recap-choix .grid-1-mobile {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .gallery .grid-item {
+        margin: auto;
+    }
+
+    .events .grid-item {
+        margin-bottom: 20px;
+    }
+
+    /* GENERAL.CSS */
+    /* Grids Mobile */
+    .grid-3-mobile {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        justify-content: center;
+        text-align: center;
+        align-items: flex-start;
+    }
+
+    /* Grid de 2 en CSS */
+    .grid-2-mobile {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .grid-1-mobile {
+        display: grid !important;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    
+
+    /* Footer */
+    footer .grid-1-mobile {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
 }
