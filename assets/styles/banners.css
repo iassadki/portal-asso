@@ -3,14 +3,14 @@
 /* **************************** */
 
 /* Super Admin */
-.banner-super-admin {
-    background-image: url('{{ asset("img/banners/banner-super-admin.png") }}');
+.banner-super-admin #img-bannier {
+    /* background-image: url('{{ asset("img/banners/banner-super-admin.png") }}'); */
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    width: 100%;
+    width: 100% !important;
     height: 400px;
     color: var(--primary-color);
     position: relative;

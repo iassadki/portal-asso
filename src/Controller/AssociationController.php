@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Association;
 use App\Form\AdminUserType;
 use App\Repository\AssociationRepository;
 use App\Repository\UserRepository;
@@ -13,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use App\Form\ConfigurationFormType;
 use App\Form\ConfigurationWebsiteType;
 use App\Form\LogoType;
 use App\Form\ColorType;
@@ -21,7 +19,10 @@ use App\Repository\EvenementRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use App\Entity\Message;
+use App\Form\ContactType;
+use App\Form\GalerieType;
+use App\Entity\Galerie;
 
 #[Route('/portalAsso', name: 'association_')]
 class AssociationController extends AbstractController
@@ -515,6 +516,183 @@ class AssociationController extends AbstractController
         $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
         return $this->render('association/calendar.html.twig', array_merge($headerVariables, ['name' => $name]));
+    }
+
+    #[Route(path: '/{name}/contact', name: 'contact')]
+    public function contact(string $name, AssociationRepository $associationRepository, Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+    {
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+        $message = new Message();
+
+
+        $association = $associationRepository->findOneBy(['nom' => $name]);
+
+        // Récupérer les utilisateurs administrateurs
+        $admins = $userRepository->findByRole('ROLE_ADMIN');
+
+        // Filtrer les utilisateurs administrateurs qui sont membres de l'association
+        foreach($admins as $admin){
+            if($admin->getAsso()->getId() == $association->getId()){
+                $adminsInAssociation[] = $admin;
+            }
+        }     
+        
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($admins);
+            dump($adminsInAssociation);
+            dump($this->getUser());
+            $message->setExpediteur($this->getUser());
+            $message->setDestinataire($admin);
+            $message->setObjet($form->get('objet')->getData());
+            $message->setMessage($form->get('message')->getData());
+            $message->setAsso($associationRepository->findOneBy(['nom' => $name]));
+            $entityManager->persist($message);
+            $entityManager->flush();
+
+            $mj = new \Mailjet\Client(
+                $this->getParameter('mailjet_api_key'),
+                $this->getParameter('mailjet_api_secret'),
+                true,
+                ['version' => 'v3.1']
+            );
+
+            foreach($adminsInAssociation as $admin){
+                $body = [
+                    'Messages' => [
+                        [
+                            'From' => [
+                                'Email' => $this->getUser()->getEmail(),
+                                'Name' => $this->getUser()->getNom(),
+                            ],
+                            'To' => [
+                                [
+                                    'Email' => $admin->getEmail(),
+                                    'Name' => $admin->getNom(),
+                                ],
+                            ],
+                            'Subject' => $form->get('objet')->getData(),
+                            'TextPart' => $form->get('message')->getData(),
+                        ],
+                    ],
+                ];
+
+                $response = $mj->post(\Mailjet\Resources::$Email, ['body' => $body]);
+                if (!$response->success()) {
+                    // Si l'envoi de l'email échoue, vous pouvez gérer l'erreur ici
+                    $status = 'Email not sent to ' . $admin->getEmail();
+                    break;
+                } else {
+                    $status = 'Emails sent';
+                }            
+            }
+
+
+        }
+
+        return $this->render('association/contact.html.twig', array_merge($headerVariables, [
+            'name' => $name,
+            'form' => $form,
+            'status' => $status ?? null,
+        ]));
+    }
+
+    #[Route(path: '/{name}/galerie', name: 'galerie')]
+    public function galerie(string $name, AssociationRepository $associationRepository): Response
+    {
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+
+        return $this->render('association/galerie.html.twig', array_merge($headerVariables, ['name' => $name]));
+    }
+
+    #[Route(path: '/{name}/galerie/new', name: 'galerie_new')]
+    public function newGalerie(string $name, AssociationRepository $associationRepository, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+        $galerie = new Galerie();
+
+        $form = $this->createForm(GalerieType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $images = $form->get('images')->getData();
+            $nom = $form->get('nom')->getData();
+            $description = $form->get('description')->getData();
+
+            $galerie->setNom($nom);
+            $galerie->setDescription($description);
+            $galerie->setAsso($associationRepository->findOneBy(['nom' => $name]));
+
+            $entityManager->persist($galerie);
+            $entityManager->flush();
+
+            $targetDirectory = $this->getParameter('galerie_directory');
+            //creer un dossier avec le nom de la galerie
+            $targetDirectory = $targetDirectory . '/' . $nom;
+            mkdir($targetDirectory);
+
+
+            foreach($images as $image){
+                $newFilename = $nom.'_'.$image->guessExtension();
+            
+                // Chemin complet du fichier cible
+                $fullPath = $targetDirectory . '/' . $newFilename;
+            
+                // Vérifie si un fichier avec le même nom existe déjà et le supprime si c'est le cas
+                if (file_exists($fullPath)) {
+                    unlink($fullPath);
+                }
+            
+                try {
+                    $image->move(
+                        $targetDirectory,
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+            }
+
+            return $this->redirectToRoute('association_galerie', ['name' => $name]);
+        }
+
+        return $this->render('association/newGalerie.html.twig', array_merge($headerVariables, [
+            'name' => $name,
+            'form' => $form
+        ]));
+
+    }
+
+    #[Route(path: '/{name}/paiement', name: 'paiement')]
+    public function paiement(string $name, AssociationRepository $associationRepository): Response
+    {
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+        $stripePublicKey = $this->getParameter('stripe_public_key');
+
+        return $this->render('association/paiement.html.twig', array_merge($headerVariables, ['name' => $name, 'stripe_public_key' => $stripePublicKey]));
+    }
+
+    #[Route(path: '/{name}/create_paiement', name: 'create_paiement')]
+    public function createPaiement(string $name, AssociationRepository $associationRepository, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+        $stripeSecretKey = $this->getParameter('stripe_secret_key');
+
+        \Stripe\Stripe::setApiKey($stripeSecretKey);
+
+        $data = json_decode($request->getContent(), true);
+        $amount = $data['amount'];
+
+        $paymentIntent = \Stripe\PaymentIntent::create([
+            'amount' => $amount,
+            'currency' => 'eur',
+            'payment_method_types' => ['card'],
+            
+        ]);
+
+       return new Response(json_encode(['clientSecret' => $paymentIntent->client_secret]));
     }
 
 }

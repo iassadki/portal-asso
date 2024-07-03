@@ -14,9 +14,17 @@ class ConfigurationWebsiteType extends AbstractType{
     {
         $builder
         -> add('paiement', CheckboxType::class, [
-            'label' => 'Activer les paiements',
+            'label' => "                        <li>
+                            Accueil
+                            <label>
+                                <input type='checkbox' checked disabled>
+                                <img src=`{{ asset('icons/orange/checkbox-true.svg') }}` alt='Checkbox'>
+                            </label>
+                        </li>",
+            'label_html' => true,
             'required' => false,
             'mapped' => false,
+
         ])
         -> add('message', CheckboxType::class, [
             'label' => 'Activer les messages',

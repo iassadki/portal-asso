@@ -1,0 +1,50 @@
+<!-- Sidebar Desktop -->
+<div id="sidebar" class="sidebar">
+	<a href="{{ path('home') }}">
+		<span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}" alt="Icône gauche"></span>
+		<span class="sidebar-text">Admin</span>
+		<span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}" alt="Icône droite"></span>
+	</a>
+	<button id="button-sidebar">
+		<a class="button-link" href="calendrier.html">Me déconnecter</a>
+		<img class="right-arrow normal" src="{{ asset('icons/orange/right-arrow.svg')}}" alt="Right Arrow">
+		<img class="right-arrow hover" src="{{ asset('icons/white/right-arrow.svg')}}" alt="Right Arrow Hover">
+	</button>
+</div>
+<!-- Sidebar Mobile -->
+<div id="sidebar-mobile" class="sidebar-mobile">
+	<div class="grid-2-mobile">
+		<div class="grid-item">
+			<ul class="nav-menu">
+				<li>
+					<a href="{{ path('home') }}" class="nav-link">Accueil</a>
+				</li>
+			</ul>
+		</div>
+		<div class="grid-item">
+			<a href="rubriques-modification.html">
+				<span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}" alt="Icône gauche"></span>
+				<span class="sidebar-text">Ajouter une rubrique</span>
+				<span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}" alt="Icône droite"></span>
+			</a>
+			<a href="logo-modification.html">
+				<span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}" alt="Icône gauche"></span>
+
+				<span class="sidebar-text">Modifier le logo</span>
+				<span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}" alt="Icône droite"></span>
+			</a>
+			<a href="couleurs-modification.html">
+				<span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}" alt="Icône gauche"></span>
+
+				<span class="sidebar-text">Modifier les couleurs</span>
+				<span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}" alt="Icône droite"></span>
+			</a>
+			<button id="button-sidebar">
+				<a class="button-link" href="calendrier.html">Me déconnecter</a>
+				<img class="right-arrow normal" src="{{ asset('icons/orange/right-arrow.svg')}}" alt="Right Arrow">
+				<img class="right-arrow hover" src="{{ asset('icons/white/right-arrow.svg')}}" alt="Right Arrow Hover">
+			</button>
+		</div>
+	</div>
+</div>
+

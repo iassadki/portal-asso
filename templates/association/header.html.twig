@@ -6,14 +6,14 @@
             <ul class="nav-menu">
             <li><a href="{{ path('association_home', {'name' : name}) }}" class="nav-link">Accueil</a></li>
             {% if paiement is same as(true) %}
-                <li><a href="{{ path('home') }}" class="nav-link">Paiement</a></li>
+                <li><a href="{{ path('association_paiement', {'name' : name})  }}" class="nav-link">Paiement</a></li>
             {% endif %}
             {% if evenement is same as(true) %}
                 <li><a href="{{ path('association_evenements', {'name' : name}) }}" class="nav-link">Evenement</a></li>
                 <li><a href="{{ path('association_calendar', {'name' : name}) }}">Calendrier</a></li>
             {% endif %}
             {% if message is same as(true) %}
-                <li><a href="{{ path('home') }}" class="nav-link">Contact</a></li>
+                <li><a href="{{ path('association_contact', {'name' : name}) }}" class="nav-link">Contact</a></li>
             {% endif %}
             {% if galerie is same as(true) %}
                 <li><a href="{{ path('home') }}" class="nav-link">Galerie</a></li>

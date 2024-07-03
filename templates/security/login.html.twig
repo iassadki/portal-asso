@@ -1,37 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Log in!
+{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('superadmin_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+	<form method="post">
+		{% if error %}
+			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+		{% if app.user %}
+			<div class="mb-3">
+				You are logged in as
+				{{ app.user.userIdentifier }},
+				<a href="{{ path('superadmin_logout') }}">Logout</a>
+			</div>
+		{% endif %}
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
-    </div>
+		<section class="login-section">
+			<div class="container-center">
+				<div class="grid-1">
+					<div class="grid-item">
+						<img src="{{ asset('logos/logo.png') }}" alt="Logo">
+						<form class="login-form" method="post">
+							<div class="input-container">
+								<input type="email" value="{{ last_username }}" name="email" placeholder="Email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+							</div>
+							<div class="input-container">
+								<input type="password" name="password" id="inputPassword" placeholder="Mot de passe" class="form-control" autocomplete="current-password" required>
+							</div>
+							<div class="checkbox-connexion">
+								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+								<label class="page-to-check">
+									<input type="checkbox" onclick="toggleCheckboxImage(this)">
+									<img src="{{ asset('icons/black/checkbox-false.svg') }}" alt="Checkbox" class="checkbox-false">
+									<img src="{{ asset('icons/black/checkbox-true.svg') }}" alt="Checkbox" class="checkbox-true" style="display: none;">
+									<span>Se souvenir de moi</span>
+								</label>
+							</div>
+							<button id="button-third" type="submit">
+								<a class="button-link">Connexion</a>
+							</button>
+							<a href="#" class="forgot-password">Mot de passe oublié ?</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</form>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+
+	</section>
+	{# < #}
+	<script>
+		function toggleCheckboxImage(checkbox) {
+const label = checkbox.parentElement;
+const checkboxFalse = label.querySelector('.checkbox-false');
+const checkboxTrue = label.querySelector('.checkbox-true');
+
+if (checkbox.checked) {
+checkboxFalse.style.display = 'none';
+checkboxTrue.style.display = 'block';
+} else {
+checkboxFalse.style.display = 'block';
+checkboxTrue.style.display = 'none';
+}
+}
+	</script>
+
 {% endblock %}

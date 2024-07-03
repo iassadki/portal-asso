@@ -16,6 +16,12 @@ class Galerie
     #[ORM\ManyToOne(inversedBy: 'galeries')]
     private ?Association $asso = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $description = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +35,30 @@ class Galerie
     public function setAsso(?Association $asso): static
     {
         $this->asso = $asso;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }

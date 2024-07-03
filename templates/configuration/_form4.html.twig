@@ -1,0 +1,27 @@
+<section class="login-section">
+	<div class="container-center">
+		<div class="grid-1">
+			<div class="grid-item">
+				<h2 class="login-title">Bienvenue sur Association_Name</h2>
+				<div class="step-container">
+					<div class="step">
+						1
+					</div>
+				</div>
+
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+				<div class="forgot-password">
+					<a href="https://main--17generatemdp.netlify.app/" target="_blank">Générer un mot de
+						                                    passe</a>
+				</div>
+
+				<button id="button-third">
+					<a class="button-link">{{ button_label|default('Suivant') }}</a>
+				</button>
+				{{ form_end(form) }}
+
+			</div>
+		</div>
+	</div>
+</section>

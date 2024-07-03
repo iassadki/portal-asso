@@ -1,41 +1,81 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dashboard
+{% endblock %}
 
 {% block body %}
 
-<h1>Admin Dashboard</h1>
+	{{ include ('security/header.html.twig')}}
 
-{% if is_granted('ROLE_SUPERADMIN') %}
-    <p>Welcome, {{user.prenom}}!</p>
-    
-    <a href="{{ path('superadmin_new_asso')}}">Create a new Asso</a>
-    <a href="{{ path('superadmin_new_user')}}">Create a new User</a>
-    <a href="{{ path('superadmin_logout')}}">Logout</a>
-    
-    <p>Here is the list of all associations</p>
-    <table>
-        <tr>
-            <th>Site</th>
-            <th>Propriétaire</th>
-            <th>Nombre de membres</th>
-        </tr>
-         {% for item in assos %}
-            <tr>
-                <td>{{ item.association.nom }}</td>
-                <td>
-                    {% for proprietaire in proprietaire %}
-                        {% if proprietaire.asso.id == item.association.id %}
-                            {{ proprietaire.prenom }}
-                        {% endif %}
-                    {% endfor %}
-                </td>
-                <td>{{ item.userCount }}</td>
-            </tr>
-        {% endfor %}
-    
-{% else %}
-    <p>Sorry, you are not an Admin.</p>
-{% endif %}
 
-{% endblock %}
+	<section class="banner-super-admin">
+		<img id="img-bannier" src="{{ asset('img/banners/banner-super-admin.png')}}" alt="Banniere Super Admin">
+		{{ include ('security/sidebar.html.twig')}}
+	</section>
+
+	{% if is_granted('ROLE_SUPERADMIN') %}
+		
+		<a href="{{ path('superadmin_new_user')}}">Create a new User</a>
+		<a href="{{ path('superadmin_logout')}}">Logout</a>
+
+		<section class="super-admin">
+			<h2>Bienvenue
+				{{user.prenom}}</h2>
+			<div class="go-back">
+				<a href="{{ path('superadmin_new_asso')}}"><img src="{{ asset('icons/orange/add-more.svg') }}" alt="Add More"></a>
+			</div>
+			<table border="1" class="superadmin-table">
+				<thead>
+					<tr>
+						<th>Sites</th>
+						<th>Nb Membres</th>
+						<th>Propriétaire</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in assos %}
+						<tr>
+							<td>{{ item.association.nom }}</td>
+							<td>
+								{% for proprietaire in proprietaire %}
+									{% if proprietaire.asso.id == item.association.id %}
+										{{ proprietaire.prenom }}
+									{% endif %}
+								{% endfor %}
+							</td>
+							<td>{{ item.userCount }}</td>
+							<td class="action-icons">
+								<a><img src="{{ asset('icons/blue/pen.svg') }}" alt=""></a>
+								<a><img src="{{ asset('icons/blue/trash.svg') }}" alt=""></a>
+								<a><img src="{{ asset('icons/blue/three-points.svg') }}" alt=""></a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</section>
+
+		{% else %}
+			<p>Sorry, you are not an Admin.</p>
+		{% endif %}
+
+
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+const menuIcone = document.getElementById("menu-icon");
+const sidebar = document.getElementById("sidebar");
+
+if (sidebar) {
+sidebar.style.width = "0";
+menuIcone.addEventListener("click", () => {
+sidebar.style.width = (sidebar.style.width === "300px") ? "0" : "300px";
+});
+} else {
+console.error("L'élément avec l'ID 'sidebar' est introuvable.");
+}
+});
+		</script>
+
+	{% endblock %}

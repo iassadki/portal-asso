@@ -43,7 +43,7 @@
 }
 
 .checkbox-connexion {
-    display: flex;
+    /* display: flex; */
     width: 100%;
     /* align-items: center; */
 }
@@ -53,9 +53,15 @@
     color: var(--secondary-color);
 }
 
-.checkbox-connexion input[type="checkbox"] {
-    display: none;
+.checkbox-connexion span {
+    white-space: nowrap;
+    /* margin-left: 20px; */
+    color: var(--primary-color);
+    margin: 0 auto;
+    align-items: center;
 }
+
+
 
 .checkbox-connexion img {
     width: 20px;
@@ -64,9 +70,10 @@
     margin-bottom: 20px;
 }
 
-.checkbox-connexion span {
+.checkbox-connexion .page-to-check span {
     white-space: nowrap;
-    margin-left: 20px;
+    margin-bottom: 15px;
+    margin-right: 100px; /* Modifier */
     color: var(--primary-color);
 }
 
@@ -247,11 +254,6 @@
     margin-top: 20px;
     margin-bottom: 20px;
     /* text-justify: inter-word; */
-}
-
-/* METTRE DANS GENERAL CSS DEBUT */
-section {
-    padding: 50px;
 }
 
 section h2 {

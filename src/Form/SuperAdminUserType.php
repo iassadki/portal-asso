@@ -18,15 +18,15 @@ class SuperAdminUserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Admin' => 'ROLE_ADMIN',
-                    'Proprietaire' => 'ROLE_PROPRIETAIRE',
-                    'User' => 'ROLE_USER',
-                ],
-                'multiple' => true,
-                'expanded' => true,
-            ])
+->add('roles', ChoiceType::class, [
+    'choices' => [
+        'Admin' => 'ROLE_ADMIN',
+        'Proprietaire' => 'ROLE_PROPRIETAIRE',
+        'User' => 'ROLE_USER',
+    ],
+    'multiple' => true,
+    'expanded' => false, // Par défaut, c'est false donc vous pouvez même omettre cette ligne
+])
             ->add('password', PasswordType::class)
             ->add('nom')
             ->add('prenom')

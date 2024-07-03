@@ -1,11 +1,12 @@
 {% extends ('base.html.twig') %}
 
-{% block title %}Personalisation 2{% endblock %}
-
-{% block body %}
-    <h1>Personalisation 2</h1>
-    {% include ('configuration/_form.html.twig') %}
-    <img src="{{ asset('upload/logo/logo.png') }}" alt="Logo">
-    <a href="{{ path('configuration_personalisation_3', {'name' : name}) }}">Continue without logo</a>
+{% block title %}Personalisation 2
 {% endblock %}
 
+{% block body %}
+	<h1>Personalisation 2</h1>
+	{% include ('configuration/_form3.html.twig') %}
+	<img src="{{ asset('logo/logo.png') }}" alt="Logo">
+	<a href="{{ path('configuration_personalisation_3', {'name' : name}) }}">Continue without logo</a>
+
+{% endblock %}

@@ -15,25 +15,11 @@
         </div>
     {% endif %}
 
-    {# <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
-    </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button> #}
-
     <section class="login-section">
         <div class="container-center">
             <div class="grid-1">
                 <div class="grid-item">
-                    <img src="{{ asset('logos/portal-asso.png') }}" alt="Logo">
+                    <img src="{{ asset('logos/logo.png') }}" alt="Logo">
                     <form class="login-form">
                         <div class="input-container">
                             <input type="email" value="{{ last_username }}" name="email" placeholder="Email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
@@ -45,9 +31,13 @@
                             <input type="hidden" name="_csrf_token"
                                 value="{{ csrf_token('authenticate') }}"
                             >
-                            <label>
-                                <input type="checkbox" checked disabled name="_remember_me" id="remember-me-checkbox">
-                                    <img id="checkbox-img" src="{{ asset('icons/orange/checkbox-false.svg') }}" alt="Checkbox">                                Se souvenir de moi
+                            <label class="page-to-check">
+                            <input type="checkbox"
+                                <input type="checkbox" onclick="toggleCheckboxImage(this)">
+                                <img src="{{ asset('icons/black/checkbox-false.svg') }}" alt="Checkbox" class="checkbox-false">
+                                <img src="{{ asset('icons/black/checkbox-true.svg') }}" alt="Checkbox" class="checkbox-true"
+                                    style="display: none;">
+                                <span>Se souvenir de moi</span>
                             </label>
                         </div>
                         <button id="button-third" type="submit">
@@ -59,21 +49,22 @@
             </div>
         </div>
     </section>
+<form>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-    var checkbox = document.getElementById('remember-me-checkbox');
-    var checkboxImage = document.getElementById('checkbox-img');
+function toggleCheckboxImage(checkbox) {
+    const label = checkbox.parentElement;
+    const checkboxFalse = label.querySelector('.checkbox-false');
+    const checkboxTrue = label.querySelector('.checkbox-true');
 
-    checkbox.addEventListener('change', function() {
-        if (checkbox.checked) {
-            checkboxImage.src = "{{ asset('icons/orange/checkbox-true.svg') }}";
-        } else {
-            checkboxImage.src = "{{ asset('icons/orange/checkbox-false.svg') }}";
-        }
-    });
-});
+    if (checkbox.checked) {
+        checkboxFalse.style.display = 'none';
+        checkboxTrue.style.display = 'block';
+    } else {
+        checkboxFalse.style.display = 'block';
+        checkboxTrue.style.display = 'none';
+    }
+}
 </script>
 
 {% endblock %}
-
