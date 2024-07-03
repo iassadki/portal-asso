@@ -1,157 +1,79 @@
 {% extends 'association/base_association.html.twig' %}
 
-{% block title %}Evenements{% endblock %}
+{% block title %}Evenements
+{% endblock %}
 {% block body %}
-    <style>
-        .flex-ul {
-            display: flex;
-            /* Add any additional styling here */
-            list-style: none; /* Removes bullet points */
-            gap: 10px; /* Adds space between items */
-        }
-    </style>
-    <section class="banner-events">
-        <!-- Menu latéral -->
-        <div id="sidebar" class="sidebar">
-            <a href="{{ path('association_admin',{'name': name}) }}">
-                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
-                        alt="Icône gauche"></span>
-                <span class="sidebar-text">Admin</span>
-                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
-                        alt="Icône droite"></span>
-            </a>
-            <a href="{{ path('association_personalisation_1',{'name': name}) }}">
-                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
-                        alt="Icône gauche"></span>
-                <span class="sidebar-text">Ajouter une rubrique</span>
-                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
-                        alt="Icône droite"></span>
-            </a>
-            <a href="{{ path('association_personalisation_2',{'name': name}) }}">
-                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
-                        alt="Icône gauche"></span>
-                <span class="sidebar-text">Modifier le logo</span>
-                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
-                        alt="Icône droite"></span>
-            </a>
-            <a href="{{ path('association_personalisation_3',{'name': name}) }}">
-                <span class="sidebar-icon left-icon"><img src="{{ asset('icons/orange/color-choice.svg')}}"
-                        alt="Icône gauche"></span>
-                <span class="sidebar-text">Modifier les couleurs</span>
-                <span class="sidebar-icon right-icon"><img src="{{ asset('icons/orange/right-arrow.svg')}}"
-                        alt="Icône droite"></span>
-            </a>
-            <button id="button-sidebar">
-                <a class="button-link" href="calendrier.html">Me déconnecter</a>
-                <img class="right-arrow normal" src="{{ asset('icons/orange/right-arrow.svg')}}" alt="Right Arrow">
-                <img class="right-arrow hover" src="{{ asset('icons/white/right-arrow.svg')}}" alt="Right Arrow Hover">
-            </button>
-        </div>
-    </section>
+	<style>
+		.flex-ul {
+			display: flex;
+			/* Add any additional styling here */
+			list-style: none; /* Removes bullet points */
+			gap: 10px; /* Adds space between items */
+		}
+	</style>
+	<section class="banner-events">
+		<img id="img-bannier" src="{{ asset('img/banners/banner-event.png')}}" alt="Banniere Home">
+		{% include 'association/sidebar.html.twig' %}
+	</section>
 
-    <section class="introduction">
-        <h2>Bienvenue sur PortalAsso</h2>
-        <p class="text-introduction">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
-            hendrerit nec, congue id mauris. Cras id
-            rutrum odio, sed maximus ex. Ut condimentum a felis vitae blandit. Pellentesque felis nibh, hendrerit quis
-            sem eget,
-            lobortis varius tortor. Morbi consequat ligula erat, in interdum lectus volutpat ac. Nullam viverra urna
-            tempus turpis
-            interdum, in eleifend ligula feugiat. Duis fermentum lectus consectetur mauris vestibulum efficitur. Cras
-            sagittis
-            mauris ipsum, sit amet tempus tortor venenatis a. In suscipit venenatis venenatis. Lorem ipsum dolor sit
-            amet,
-            consectetur adipiscing elit. Phasellus congue eros lorem, sed eleifend elit vehicula eget. In rutrum, lectus
-            a egestas
-            rutrum, tortor odio viverra eros, et scelerisque lorem libero id lectus.</p>
-    </section>
-    <a href="{{ path('association_evenements_new', {'name': name}) }}">Ajouter un evenement</a>
+	<section class="introduction">
+		<h2>Evenements</h2>
+		<p class="text-introduction">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
+									            hendrerit nec, congue id mauris. Cras id
+									            rutrum odio, sed maximus ex. Ut condimentum a felis vitae blandit. Pellentesque felis nibh, hendrerit quis
+									            sem eget,
+									            lobortis varius tortor. Morbi consequat ligula erat, in interdum lectus volutpat ac. Nullam viverra urna
+									            tempus turpis
+									            interdum, in eleifend ligula feugiat. Duis fermentum lectus consectetur mauris vestibulum efficitur. Cras
+									            sagittis
+									            mauris ipsum, sit amet tempus tortor venenatis a. In suscipit venenatis venenatis. Lorem ipsum dolor sit
+									            amet,
+									            consectetur adipiscing elit. Phasellus congue eros lorem, sed eleifend elit vehicula eget. In rutrum, lectus
+									            a egestas
+									            rutrum, tortor odio viverra eros, et scelerisque lorem libero id lectus.</p>
+	</section>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Lieu</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for evenement in evenements %}
-                <tr>
-                    <td>{{ evenement.event.nom }}</td>
-                    {% if evenement.event.dateDebut|date('Y-m-d') == evenement.event.dateFin|date('Y-m-d') %}
-                        <td>{{ evenement.event.dateDebut|date('Y-m-d') }}</td>
-                    {% else %}
-                        <td>{{ evenement.event.dateDebut|date('Y-m-d') }} - {{ evenement.event.dateFin|date('Y-m-d') }}</td>
-                    {% endif %}
-                    <td>{{ evenement.event.description }}</td>
-                    <td>{{ evenement.event.lieu }}</td>
-                    <td>
-                        <a href="{{ path('association_evenements_edit', {'id': evenement.event.id, 'name': name}) }}">edit</a>
-                        <a href="{{ path('association_evenements_delete', {'id': evenement.event.id, 'name': name}) }}">delete</a>
-
-                        <a href="{{ path('association_evenements_add', {'id': evenement.event.id, 'name': name}) }}">
-                        {% if evenement.participate %}
-                            Annuler participation
-                        {% else %}
-                            Participer
+		<section class="events">
+			{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_PROPRIETAIRE') %}
+				<div class="add-more">
+					<a href="{{ path('association_evenements_new', {'name': name}) }}"><img src="{{ asset('icons/orange/add-more.svg') }}" alt="Add More"></a>
+				</div>
+			{% endif %}
+			<div class="grid-3 grid-1-mobile">
+				{% for evenement in evenements %}
+					<div class="grid-item">
+						<img class="image-event" src="{{ asset('uploads/evenements/' ~ evenement.event.nom ~ '.png') }}" alt="assets/img/test_image_grid1">
+						<h3 class="event-title">{{ evenement.event.nom }}</h3>
+						<p class="event-date">
+                            {% if evenement.event.dateDebut|date('Y-m-d') == evenement.event.dateFin|date('Y-m-d') %}
+						        Date : {{ evenement.event.dateDebut|date('d-m-Y') }}
+                            {% else %}
+                                Du {{ evenement.event.dateDebut|date('d-m-Y') }}
+                                au
+                                    {{ evenement.event.dateFin|date('d-m-Y') }}</td>
+                            {% endif %}
+                        </p>
+						<div class="bottom-border"></div>
+						<p class="event-info">{{ evenement.event.description }}</p>
+						<p class="event-place">{{ evenement.event.lieu }}</p>
+						<button id="button-basic">
+							<a class="button-link" href="{{ path('association_evenements_add', {'id': evenement.event.id, 'name': name}) }}">
+                                {% if evenement.participate %}
+								    Annuler participation
+                                {% else %}
+                                    Participer
+                                {% endif %}
+                            </a>
+							<img class="right-arrow normal" src="{{ asset('icons/blue/right-arrow.svg') }}" alt="Right Arrow">
+							<img class="right-arrow hover" src="{{ asset('icons/white/right-arrow.svg') }}" alt="Right Arrow">
+						</button>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_PROPRIETAIRE') %}
+                            <a href="{{ path('association_evenements_edit', {'id': evenement.event.id, 'name': name}) }}">Modifier</a>
+                            <a href="{{ path('association_evenements_delete', {'id': evenement.event.id, 'name': name}) }}">Supprimer</a>
                         {% endif %}
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-
-            <section class="events">
-        <div class="add-more">
-            <a href="evenement-creation.html"><img src="assets/icons/orange/add-more.svg" alt="Add More"></a>
-        </div>
-        <div class="grid-3">
-            <div class="grid-item">
-                <img class="image-event" src="assets/img/test_image_grid.jpeg" alt="assets/img/test_image_grid1">
-                <h3 class="event-title">Titre evenement</h3>
-                <p class="event-date">Date : 17/06/2024</p>
-                <div class="bottom-border"></div>
-                <p class="event-info">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
-                    hendrerit nec, congue id mauris.</p>
-                <p class="event-place">Paris, 75014</p>
-                <button id="button-basic">
-                    <a class="button-link" href="">Participer</a>
-                    <img class="right-arrow normal" src="assets/icons/blue/right-arrow.svg" alt="Right Arrow">
-                    <img class="right-arrow hover" src="assets/icons/white/right-arrow.svg" alt="Right Arrow">
-                </button>
-            </div>
-            <div class="grid-item">
-                <img class="image-event" src="assets/img/test_image_grid.jpeg" alt="test_image_grid2">
-                <h3 class="event-title">Titre evenement</h3>
-                <p class="event-date">Date : 17/06/2024</p>
-                <div class="bottom-border"></div>
-                <p class="event-info">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
-                    hendrerit nec, congue id mauris.</p>
-                <p class="event-place">Paris, 75014</p>
-                <button id="button-basic">
-                    <a class="button-link" href="">Participer</a>
-                    <img class="right-arrow normal" src="assets/icons/blue/right-arrow.svg" alt="Right Arrow">
-                    <img class="right-arrow hover" src="assets/icons/white/right-arrow.svg" alt="Right Arrow">
-                </button>
-            </div>
-            <div class="grid-item">
-                <img class="image-event" src="assets/img/test_image_grid.jpeg" alt="test_image_grid3">
-                <h3 class="event-title">Titre evenement</h3>
-                <p class="event-date">Date : 17/06/2024</p>
-                <div class="bottom-border"></div>
-                <p class="event-info">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
-                    hendrerit nec, congue id mauris.</p>
-                <p class="event-place">Paris, 75014</p>
-                <button id="button-basic">
-                    <a class="button-link" href="">Participer</a>
-                    <img class="right-arrow normal" src="assets/icons/blue/right-arrow.svg" alt="Right Arrow">
-                    <img class="right-arrow hover" src="assets/icons/white/right-arrow.svg" alt="Right Arrow">
-                </button>
-            </div>
-        </div>
-    </section>
-    </table>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+	</table>
 {% endblock %}
