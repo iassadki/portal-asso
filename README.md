@@ -9,6 +9,16 @@ Template pour associations et adhérents d'associations. Le but est de rassemble
 - Choisir un logo pour son association (admin)
 - Accéder au formulaire de contact
 
+## 🛠 Lancer le projet
+1. 
+```
+composer install
+```
+2. 
+```
+composer require symfony/webpack-encore-bundle
+```
+
 ## 🛠 Technologies
 - Languages : `JavaScript`, `HTML`, `CSS`, `PHP`
 - Framework : Symfony
