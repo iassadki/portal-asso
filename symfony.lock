@@ -310,6 +310,7 @@
         },
         "files": [
             "./assets/app.js",
+            "./assets/styles/banners.css",
             "./assets/styles/general.css",
             "./assets/styles/styles.css",
             "./assets/styles/header-footer.css",

@@ -31,8 +31,12 @@ class AssociationController extends AbstractController
     public function index(string $name, AssociationRepository $associationRepository): Response
     {
         $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+        $asso = $associationRepository->findOneBy(['nom' => $name]);
 
-        return $this->render('association/index.html.twig', array_merge($headerVariables, ['name' => $name]));
+        return $this->render('association/index.html.twig', array_merge($headerVariables, [
+            'name' => $name,
+            'asso' => $asso,
+        ]));
     }
 
     public function getHeaderVariables(string $name, AssociationRepository $associationRepository): array
@@ -45,6 +49,37 @@ class AssociationController extends AbstractController
             'evenement' => $association->isEvenementCheck(),
             'galerie' => $association->isGalerieCheck(),
         ];
+    }
+
+    #[Route('/{name}/css/dynamic.css', name: 'dynamic_css', methods: ['GET'])]
+    public function color(string $name, AssociationRepository $associationRepository): Response
+    {
+        $association = $associationRepository->findOneBy(['nom' => $name]);
+
+        $couleurPrimaire = $association->getCouleurPrimaire();
+        $couleurSecondaire = $association->getCouleurSecondaire();
+        $couleurTertiaire = $association->getCouleurTertiaire();
+
+        $cssContent = "
+        :root {
+            --primary-color: {$couleurPrimaire};
+            --secondary-color: {$couleurSecondaire};
+            --third-color: {$couleurTertiaire};
+            --blue-color: #2196f3;
+            --black-color: #000000;
+            --white-color: #ffffff;
+            --grey-color: #d8d6d6;
+            --grey2-color: #666666;
+            --primary-font: 'Montserrat', sans-serif;
+            --secondary-font: 'Open Sans', sans-serif;
+            --third-font: 'Lato', sans-serif;
+        }
+        ";
+
+       $response = new Response($cssContent);
+       $response->headers->set('Content-Type', 'text/css');
+
+        return $response;
     }
 
     #[Route('/{name}/admin', name: 'admin', methods: ['GET'])]
@@ -363,6 +398,8 @@ class AssociationController extends AbstractController
         $evenement = $evenementRepository->findAll();
         $headerVariables = $this->getHeaderVariables($name, $associationRepository);
 
+        $evenements = [];
+
         foreach($evenement as $event){
             if($event->getProprietaire()->getAsso()->getId() == $this->getUser()->getAsso()->getId()){
                 $eventData = [
@@ -495,6 +532,8 @@ class AssociationController extends AbstractController
         $evenement = $evenementRepository->findAll();
 
         $headerVariables = $this->getHeaderVariables($name, $associationRepository);
+
+        $evenements = [];
 
         foreach($evenement as $event){
            if(in_array($user->getId(), $event->getListeUsers())){

@@ -1,43 +1,82 @@
-{# templates/booking/calendar.html.twig #}
 {% extends 'association/base_association.html.twig' %}
 
-{% block body %}
-    {# <a href="{{ path('association_evenements_new') }}">Create new booking</a> #}
-
-    <div id="calendar-holder"></div>
+{% block title %}Calendrier
 {% endblock %}
+{% block body %}
 
-{% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+	<a href="#site-body" class="scrollTop"><img class="flecheTop" src="{{ asset('icons/orange/up-arrow.svg')}}"/></a>
 
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', () => {
-            const calendarEl = document.getElementById('calendar-holder');
+	<section class="banner-home">
+		<img id="img-bannier" src="{{ asset('img/banners/banner-home.png')}}" alt="Banniere Calendar">
+		{% include 'association/sidebar.html.twig' %}
+	</section>
 
-                const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                editable: true,
-                eventSources: [
-                    {
-                        url: "{{ path('fc_load_events') }}",
-                        method: 'POST',
-                        extraParams: {
-                            filters: JSON.stringify({})
-                        },
-                        failure: () => {
-                            // alert('There was an error while fetching FullCalendar!');
-                        },
-                    },
-                ],
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
-                },
-                timeZone: 'UTC',
-            });
+	<section class="introduction">
+		<h2>Calendrier</h2>
+		<p class="text-introduction">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
+																								            hendrerit nec, congue id mauris. Cras id
+																								            rutrum odio, sed maximus ex. Ut condimentum a felis vitae blandit. Pellentesque felis nibh, hendrerit quis
+																								            sem eget,
+																								            lobortis varius tortor. Morbi consequat ligula erat, in interdum lectus volutpat ac. Nullam viverra urna
+																								            tempus turpis
+																								            interdum, in eleifend ligula feugiat. Duis fermentum lectus consectetur mauris vestibulum efficitur. Cras
+																								            sagittis
+																								            mauris ipsum, sit amet tempus tortor venenatis a. In suscipit venenatis venenatis. Lorem ipsum dolor sit
+																								            amet,
+																								            consectetur adipiscing elit. Phasellus congue eros lorem, sed eleifend elit vehicula eget. In rutrum, lectus
+																								            a egestas
+																								            rutrum, tortor odio viverra eros, et scelerisque lorem libero id lectus.</p>
+	</section>
 
-            calendar.render();
-        });
-    </script>
+	<div id="calendar-holder"></div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', () => {
+const calendarEl = document.getElementById('calendar-holder');
+
+const calendar = new FullCalendar.Calendar(calendarEl, {
+initialView: 'dayGridMonth',
+editable: true,
+eventSources: [
+{
+url: "{{ path('fc_load_events') }}",
+method: 'POST',
+extraParams: {
+filters: JSON.stringify({})
+},
+failure: () => { // alert('There was an error while fetching FullCalendar!');
+}
+},
+],
+headerToolbar: {
+left: 'prev,next today',
+center: 'title',
+right: 'dayGridMonth,timeGridWeek,timeGridDay'
+},
+timeZone: 'UTC'
+});
+
+calendar.render();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+const menuIcone = document.getElementById("menu-icon");
+const sidebar = document.getElementById("sidebar");
+
+if (sidebar) {
+sidebar.style.width = "0";
+menuIcone.addEventListener("click", () => {
+sidebar.style.width = (sidebar.style.width === "300px") ? "0" : "300px";
+});
+} else {
+console.error("L'élément avec l'ID 'sidebar' est introuvable.");
+}
+});
+	</script>
+
+{% include 'footer.html.twig' %}
+
 {% endblock %}

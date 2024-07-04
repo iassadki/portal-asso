@@ -3,16 +3,11 @@
 {% block title %}Evenements
 {% endblock %}
 {% block body %}
-	<style>
-		.flex-ul {
-			display: flex;
-			/* Add any additional styling here */
-			list-style: none; /* Removes bullet points */
-			gap: 10px; /* Adds space between items */
-		}
-	</style>
-	<section class="banner-events">
-		<img id="img-bannier" src="{{ asset('img/banners/banner-event.png')}}" alt="Banniere Home">
+
+	<a href="#site-body" class="scrollTop"><img class="flecheTop" src="{{ asset('icons/orange/up-arrow.svg')}}"/></a>
+
+	<section class="banner-home">
+		<img id="img-bannier" src="{{ asset('img/banners/banner-event.png')}}" alt="Banniere Event">
 		{% include 'association/sidebar.html.twig' %}
 	</section>
 
@@ -39,6 +34,10 @@
 					<a href="{{ path('association_evenements_new', {'name': name}) }}"><img src="{{ asset('icons/orange/add-more.svg') }}" alt="Add More"></a>
 				</div>
 			{% endif %}
+			
+		{% if evenements is empty %}
+			<h2>Il n'y a pas d'événements.</h2>
+		{% else %}
 			<div class="grid-3 grid-1-mobile">
 				{% for evenement in evenements %}
 					<div class="grid-item">
@@ -48,7 +47,7 @@
                             {% if evenement.event.dateDebut|date('Y-m-d') == evenement.event.dateFin|date('Y-m-d') %}
 						        Date : {{ evenement.event.dateDebut|date('d-m-Y') }}
                             {% else %}
-                                Du {{ evenement.event.dateDebut|date('d-m-Y') }}
+                                Date : du {{ evenement.event.dateDebut|date('d-m-Y') }}
                                 au
                                     {{ evenement.event.dateFin|date('d-m-Y') }}</td>
                             {% endif %}
@@ -74,6 +73,26 @@
 					</div>
 				{% endfor %}
 			</div>
+			{% endif %}
 		</section>
-	</table>
+		
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+const menuIcone = document.getElementById("menu-icon");
+const sidebar = document.getElementById("sidebar");
+
+if (sidebar) {
+sidebar.style.width = "0";
+menuIcone.addEventListener("click", () => {
+sidebar.style.width = (sidebar.style.width === "300px") ? "0" : "300px";
+});
+} else {
+console.error("L'élément avec l'ID 'sidebar' est introuvable.");
+}
+});
+	</script>
+
+{% include 'footer.html.twig' %}
+
 {% endblock %}

@@ -35,6 +35,25 @@ body {
     color: #333;
 }
 
+input[type="checkbox"] {
+    display: block;
+    cursor: pointer;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.checkbox-container label {
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+
+
+
 /* Buger icon */
 #burger-icon {
     display: none;
@@ -678,8 +697,6 @@ section .return-arrow img {
 }
 
 /* Calendrier */
-
-
 
 /* Styles pour les petits écrans */
 @media screen and (max-width: 768px) {

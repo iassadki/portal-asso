@@ -1,35 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Récapitulatif{% endblock %}
+{% block title %}Récapitulatif
+{% endblock %}
 
 {% block body %}
-    <h1>Récapitulatif</h1>
-    <div style="display: flex; justify-content: space-around; margin-top: 20px;">
-        <div style="border: 1px solid #ccc; padding: 20px; width: 30%;">
-            <ul style="list-style: none; padding: 0;">
-                <li><input type="checkbox" {% if paiement %}checked{% endif %} disabled> Accueil</li>
-                <li><input type="checkbox" {% if message %}checked{% endif %} disabled> Événements</li>
-                <li><input type="checkbox" {% if evenement %}checked{% endif %} disabled> Calendrier</li>
-                <li><input type="checkbox" {% if galerie %}checked{% endif %} disabled> Galerie</li>
-                <li><input type="checkbox" {% if paiement %}checked{% endif %} disabled> Contact</li>
-                <li><input type="checkbox" {% if paiement %}checked{% endif %} disabled> Cotisation</li>
-            </ul>
-            <a href="{{ path('configuration_personalisation_1', {'name' : name}) }}"><button class="btn btn-primary">MODIFIER</button></a>
-        </div>
-        <div style="border: 1px solid #ccc; padding: 20px; width: 30%; text-align: center;">
-            <img src="../../public/uploads/logo/logo.png" alt="Association Image" style="max-width: 100%;">
-            <a href="{{ path('configuration_personalisation_2', {'name' : name}) }}"><button class="btn btn-primary">MODIFIER</button></a>
-        </div>
-        <div style="border: 1px solid #ccc; padding: 20px; width: 30%;">
-            <ul style="list-style: none; padding: 0;">
-                <li>Primaire <span style="background-color: {{ couleurPrimaire }}; display: inline-block; width: 20px; height: 20px;"></span></li>
-                <li>Secondaire <span style="background-color: {{ couleurSecondaire }}; display: inline-block; width: 20px; height: 20px;"></span> </li>
-                <li>Tertiaire <span style="background-color: {{ couleurTertiaire }}; display: inline-block; width: 20px; height: 20px;"></span> </li>
-            </ul>
-          <a href="{{ path('configuration_personalisation_3', {'name' : name}) }}"><button class="btn btn-primary">MODIFIER</button></a>
-        </div>
-    </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="{{ path('association_home', {'name' : name})}}"><button class="btn btn-success">VALIDER</button></a>
-    </div>
+<section class="recap-choix">
+	<h2 class="section-title">Récapitulatif</h2>
+	<div class="grid-3 grid-1-mobile">
+		<div class="grid-item">
+			<ul style="list-style: none; padding: 0;">
+				<li><input type="checkbox" {% if paiement %} checked {% endif %} disabled>
+					Accueil</li>
+				<li><input type="checkbox" {% if message %} checked {% endif %} disabled>
+					Événements</li>
+				<li><input type="checkbox" {% if evenement %} checked {% endif %} disabled>
+					Calendrier</li>
+				<li><input type="checkbox" {% if galerie %} checked {% endif %} disabled>
+					Galerie</li>
+				<li><input type="checkbox" {% if paiement %} checked {% endif %} disabled>
+					Contact</li>
+				<li><input type="checkbox" {% if paiement %} checked {% endif %} disabled>
+					Cotisation</li>
+			</ul>
+			{# <a href="{{ path('configuration_personalisation_1', {'name' : name}) }}">
+				<button class="btn btn-primary">MODIFIER</button>
+			</a> #}
+			<button id="button-third">
+				<a class="button-link" href="{{ path('configuration_personalisation_1', {'name' : name}) }}">Modifier</a>
+			</button>
+		</div>
+		<div class="grid-item">
+			<img src="{{ asset('logos/logo.png')}}" alt="Association Image" style="max-width: 100%;">
+			{# <a href="{{ path('configuration_personalisation_2', {'name' : name}) }}">
+				<button class="btn btn-primary">MODIFIER</button>
+			</a> #}
+			<button id="button-third">
+				<a class="button-link" href="{{ path('configuration_personalisation_2', {'name' : name}) }}">Modifier</a>
+			</button>
+		</div>
+		<div class="grid-item">
+			<ul style="list-style: none; padding: 0;">
+				<li>Primaire
+					<span style="background-color: {{ couleurPrimaire }}; display: inline-block; width: 20px; height: 20px;"></span>
+				</li>
+				<li>Secondaire
+					<span style="background-color: {{ couleurSecondaire }}; display: inline-block; width: 20px; height: 20px;"></span>
+				</li>
+				<li>Tertiaire
+					<span style="background-color: {{ couleurTertiaire }}; display: inline-block; width: 20px; height: 20px;"></span>
+				</li>
+			</ul>
+			{# <a href="{{ path('configuration_personalisation_3', {'name' : name}) }}">
+				<button class="btn btn-primary">MODIFIER</button>
+			</a> #}
+			<button id="button-third">
+				<a class="button-link" href="{{ path('configuration_personalisation_3', {'name' : name}) }}">Modifier</a>
+			</button>
+		</div>
+	</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<button id="button-third">
+    <a class="button-link" href="{{ path('association_home', {'name' : name})}}">Valider</a>
+</button>
+
+
 {% endblock %}

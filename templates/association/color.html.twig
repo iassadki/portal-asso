@@ -1,0 +1,40 @@
+{# templates/association/colors.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Association Colors</title>
+    <style>
+        :root {
+            --primary-color: {{ couleurPrimaire }};
+            --secondary-color: {{ couleurSecondaire }};
+            --third-color: {{ couleurTertiaire }};
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .tertiary {
+            border: 1px solid var(--third-color);
+        }
+    </style>
+</head>
+<body>
+    <h1>Couleurs de l'association</h1>
+    <p>Ceci est un exemple de texte.</p>
+    <div class="tertiary">Exemple de div avec bordure tertiaire</div>
+
+    <script>
+        // Exemple de fonction JavaScript pour changer dynamiquement les couleurs
+        function changeColors(primary, secondary, third) {
+            document.documentElement.style.setProperty('--primary-color', primary);
+            document.documentElement.style.setProperty('--secondary-color', secondary);
+            document.documentElement.style.setProperty('--third-color', third);
+        }
+
+        // Appel de la fonction pour changer les couleurs (exemple)
+        changeColors( {{ couleurPrimaire }}, {{ couleurSecondaire }},  {{ couleurTertiaire }});
+    </script>
+</body>
+</html>

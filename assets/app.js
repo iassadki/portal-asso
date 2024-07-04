@@ -7,9 +7,33 @@ import './bootstrap.js';
  */
 import './styles/styles.css';
 import './styles/general.css';
+import './styles/banners.css';
 import './styles/header-footer.css';
 
-// console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionnez les champs de couleur de votre formulaire
+    const couleurPrimaireInput = document.querySelector('#couleurPrimaire');
+    const couleurSecondaireInput = document.querySelector('#couleurSecondaire');
+    const couleurTertiaireInput = document.querySelector('#couleurTertiaire');
+
+    // Fonction pour mettre à jour les variables CSS
+    function updateRootColors() {
+        const rootStyle = document.documentElement.style;
+        rootStyle.setProperty('--primary-color', couleurPrimaireInput.value);
+        rootStyle.setProperty('--secondary-color', couleurSecondaireInput.value);
+        rootStyle.setProperty('--third-color', couleurTertiaireInput.value);
+    }
+
+    // Appliquez les couleurs initiales au chargement
+    updateRootColors();
+
+    // Ajoutez des écouteurs d'événements pour détecter les changements
+    couleurPrimaireInput.addEventListener('change', updateRootColors);
+    couleurSecondaireInput.addEventListener('change', updateRootColors);
+    couleurTertiaireInput.addEventListener('change', updateRootColors);
+});
 
 // const fleche = document.querySelector(".scrollTop"); 
 // const header = document.querySelector("body > header").offsetHeight; 

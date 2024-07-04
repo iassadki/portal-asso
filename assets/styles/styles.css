@@ -41,40 +41,37 @@
     width: 100%;
 }
 
-.checkbox-connexion {
-    /* display: flex; */
+/* .checkbox-connexion {
     width: 100%;
-    /* align-items: center; */
-}
+} */
 
-.checkbox-connexion label {
+/* .checkbox-connexion label {
     display: flex;
     color: var(--secondary-color);
 }
 
 .checkbox-connexion span {
     white-space: nowrap;
-    /* margin-left: 20px; */
     color: var(--primary-color);
     margin: 0 auto;
     align-items: center;
-}
+} */
 
 
 
-.checkbox-connexion img {
+/* .checkbox-connexion img {
     width: 20px;
     height: 20px;
     cursor: pointer;
     margin-bottom: 20px;
-}
+} */
 
-.checkbox-connexion .page-to-check span {
+/* .checkbox-connexion .page-to-check span {
     white-space: nowrap;
     margin-bottom: 15px;
-    margin-right: 100px; /* Modifier */
+    margin-right: 100px; 
     color: var(--primary-color);
-}
+} */
 
 /* Choix des rubriques */
 .container-center .grid-item {
@@ -281,6 +278,16 @@ section h2 {
     text-transform: uppercase;
 }
 
+#calendar-holder {
+    margin : 0 20px;
+    padding-top: 20px;
+}
+
+.fc {
+    margin : 0 20px;
+    padding-top: 20px;
+
+}
 .superadmin-table td {
     background-color: white;
     color: black;
@@ -519,9 +526,9 @@ section h2 {
     margin-left: 5px;
 }
 
-.contact-form input[type="checkbox"] {
+/* .contact-form input[type="checkbox"] {
     margin-top: 40px;
-}
+} */
 
 .contact .grid-2 .grid-item #button {
     float: center;

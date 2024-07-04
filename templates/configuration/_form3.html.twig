@@ -13,10 +13,6 @@
 				<img src="{{ asset('icons/orange/left-arrow.svg') }}" alt="Return Arrow">
 			</a>
 
-			{# <div class="logo-change">
-				<img src="{{ asset('logos/logo.png') }}" alt="Logo">
-			</div> #}
-
 			<div class="file-choose">
 				{{ form_label(form.logo, 'Ajouter un fichier', {'label_attr': {'class': 'custom-label'}}) }}
 				{{ form_widget(form.logo, {'attr': {'id': 'file-upload', 'class': 'custom-file-input'}}) }}
@@ -27,8 +23,9 @@
 
 			<p class="limit-files">La limite de vos fichiers ne doit pas dépasser 100 Mo</p>
 
-			<button type="submit" class="btn">{{ button_label|default('Save') }}</button>
-			{# </div> #}
+			<button type="submit" id="button-third">
+				<a class="button-link">{{ button_label|default('Save') }}</a>
+			</button>
 		</div>
 	</section>
 	{{ form_end(form) }}

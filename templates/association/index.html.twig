@@ -4,22 +4,11 @@
 	{{ name }}
 {% endblock %}
 {% block body %}
-	<style>
-		.flex-ul {
-			display: flex;
-			/* Add any additional styling here */
-			list-style: none; /* Removes bullet points */
-			gap: 10px; /* Adds space between items */
-		}
-	</style>
 
-	{# {% include 'association/header.html.twig' %} #}
 	<a href="#site-body" class="scrollTop"><img class="flecheTop" src="{{ asset('icons/orange/up-arrow.svg')}}"/></a>
-
 
 	<section class="banner-home">
 		<img id="img-bannier" src="{{ asset('img/banners/banner-home.png')}}" alt="Banniere Home">
-
 		{% include 'association/sidebar.html.twig' %}
 	</section>
 
@@ -55,7 +44,7 @@
 			{% endif %}
 			{% if evenement is same as(true) %}
 				<div class="grid-item">
-					<img class="img-rubrics" src="{{ asset('img/banners/banner-home.png') }}" alt="event">
+					<img class="img-rubrics" src="{{ asset('img/banners/banner-event.png') }}" alt="event">
 					<button id="button-basic">
 						<a class="button-link" href="{{ path('association_evenements', {'name' : name}) }}">Événements</a>
 						<img class="right-arrow normal" src="{{ asset('icons/blue/right-arrow.svg') }}" alt="Right Arrow">
@@ -63,7 +52,7 @@
 					</button>
 				</div>
 				<div class="grid-item">
-					<img class="img-rubrics" src="{{ asset('img/banners/banner-home.png') }}" alt="event">
+					<img class="img-rubrics" src="{{ asset('img/banners/banner-calendar.png') }}" alt="event">
 					<button id="button-basic">
 						<a class="button-link" href="{{ path('association_calendar', {'name' : name}) }}">Calendrier</a>
 						<img class="right-arrow normal" src="{{ asset('icons/blue/right-arrow.svg') }}" alt="Right Arrow">
@@ -74,7 +63,7 @@
 			{% endif %}
 			{% if galerie is same as(true) %}
 				<div class="grid-item">
-					<img class="img-rubrics" src="{{ asset('img/banners/banner-home.png') }}" alt="event">
+					<img class="img-rubrics" src="{{ asset('img/banners/banner-gallery.png') }}" alt="event">
 					<button id="button-basic">
 						<a class="button-link" href="">Galerie</a>
 						<img class="right-arrow normal" src="{{ asset('icons/blue/right-arrow.svg') }}" alt="Right Arrow">
@@ -84,7 +73,7 @@
 			{% endif %}
 			{% if message is same as(true) %}
 				<div class="grid-item">
-					<img class="img-rubrics" src="{{ asset('img/banners/banner-home.png') }}" alt="event">
+					<img class="img-rubrics" src="{{ asset('img/banners/banner-contact.png') }}" alt="event">
 					<button id="button-basic">
 						<a class="button-link" href="{{ path('association_contact', {'name' : name}) }}">Contact</a>
 						<img class="right-arrow normal" src="{{ asset('icons/blue/right-arrow.svg') }}" alt="Right Arrow">

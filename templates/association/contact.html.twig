@@ -1,17 +1,42 @@
 {% extends 'association/base_association.html.twig' %}
 
-{% block title %}Contact{% endblock %}
-
+{% block title %}Contact
+{% endblock %}
 {% block body %}
-    <h1>Contact</h1>
 
-   {{ include('association/_form.html.twig') }}
+	<a href="#site-body" class="scrollTop"><img class="flecheTop" src="{{ asset('icons/orange/up-arrow.svg')}}"/></a>
 
-    {% if status is defined %}
-        {% if status == 'success' %}
-            <div class="alert alert-success">Votre message a été envoyé avec succès !</div>
-        {% else %}
-            <div class="alert alert-danger">Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer plus tard.</div>
-        {% endif %}
-    {% endif %}
+	<section class="banner-home">
+		<img id="img-bannier" src="{{ asset('img/banners/banner-contact.png')}}" alt="Banniere Contact">
+		{% include 'association/sidebar.html.twig' %}
+	</section>
+
+	<section class="introduction">
+		<h2>Contact</h2>
+		<p class="text-introduction">Maecenas id lorem massa. Vivamus a dolor ex. Morbi nibh sapien, finibus sed
+																	            hendrerit nec, congue id mauris. Cras id
+																	            rutrum odio, sed maximus ex. Ut condimentum a felis vitae blandit. Pellentesque felis nibh, hendrerit quis
+																	            sem eget,
+																	            lobortis varius tortor. Morbi consequat ligula erat, in interdum lectus volutpat ac. Nullam viverra urna
+																	            tempus turpis
+																	            interdum, in eleifend ligula feugiat. Duis fermentum lectus consectetur mauris vestibulum efficitur. Cras
+																	            sagittis
+																	            mauris ipsum, sit amet tempus tortor venenatis a. In suscipit venenatis venenatis. Lorem ipsum dolor sit
+																	            amet,
+																	            consectetur adipiscing elit. Phasellus congue eros lorem, sed eleifend elit vehicula eget. In rutrum, lectus
+																	            a egestas
+																	            rutrum, tortor odio viverra eros, et scelerisque lorem libero id lectus.</p>
+	</section>
+
+
+	{{ include('association/_form.html.twig') }}
+
+	{% if status is defined %}
+		{% if status == 'success' %}
+			<div class="alert alert-success">Votre message a été envoyé avec succès !</div>
+		{% endif %}
+	{% endif %}
+
+{% include 'footer.html.twig' %}
+
 {% endblock %}

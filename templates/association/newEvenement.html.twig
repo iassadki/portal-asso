@@ -1,11 +1,25 @@
 {% extends 'association/base_association.html.twig' %}
 
-{% block title %}New Evenement{% endblock %}
-
+{% block title %}Nouvel evenement
+{% endblock %}
 {% block body %}
-    <h1>Create new Evenement</h1>
+
+<a href="#site-body" class="scrollTop"><img class="flecheTop" src="{{ asset('icons/orange/up-arrow.svg')}}"/></a>
+
+<section class="banner-home">
+	<img id="img-bannier" src="{{ asset('img/banners/banner-event.png')}}" alt="Banniere Event">
+	{% include 'association/sidebar.html.twig' %}
+</section>
+
+<section class="events">
+    <h2>Nouvel evenement</h2>
+</section>
+
 
     {{ include('association/_form.html.twig') }}
 
     <a href="{{ path('association_home', {'name' : name}) }}">back to list</a>
+
+{% include 'footer.html.twig' %}
+
 {% endblock %}

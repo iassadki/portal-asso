@@ -1,15 +1,22 @@
 {% extends 'association/base_association.html.twig' %}
 
-{% block title %}Personalisation 3{% endblock %}
-
-{% block body %}
-    <h1>Personalisation 3</h1>
-    {{ form_start(colorForm) }}
-    {{ form_row(colorForm.couleurPrimaire) }}
-    {{ form_row(colorForm.couleurSecondaire) }}
-    {{ form_row(colorForm.couleurTertiaire) }}
-        <button type="submit">Enregistrer</button>
-    {{ form_end(colorForm) }}
-    <a href="{{ path('association_home', {'name' : name}) }}">Retour</a>
+{% block title %}Personalisation 3
 {% endblock %}
 
+{% block body %}
+	<section class="banner-home">
+		<img id="img-bannier" src="{{ asset('img/banners/banner-color-change.png')}}" alt="Banniere Home">
+		{% include 'association/sidebar.html.twig' %}
+	</section>
+
+	{{ form_start(colorForm) }}
+	{{ form_row(colorForm.couleurPrimaire) }}
+	{{ form_row(colorForm.couleurSecondaire) }}
+	{{ form_row(colorForm.couleurTertiaire) }}
+	<button type="submit">Enregistrer</button>
+	{{ form_end(colorForm) }}
+	<a href="{{ path('association_home', {'name' : name}) }}">Retour</a>
+{% include 'footer.html.twig' %}
+
+
+{% endblock %}

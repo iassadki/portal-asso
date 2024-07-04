@@ -5,10 +5,14 @@
 
 {% block body %}
 
+<a href="#site-body" class="scrollTop"><img class="flecheTop" src="{{ asset('icons/orange/up-arrow.svg')}}"/></a>
+
+
+
 	{{ include ('security/header.html.twig')}}
 
 
-	<section class="banner-super-admin">
+	<section class="banner-home">
 		<img id="img-bannier" src="{{ asset('img/banners/banner-super-admin.png')}}" alt="Banniere Super Admin">
 		{{ include ('security/sidebar.html.twig')}}
 	</section>

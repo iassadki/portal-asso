@@ -19,18 +19,29 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Nom', TextType::class,
-            ['mapped' => false])
-            ->add('Prenom', TextType::class,
-            ['mapped' => false])
-            ->add('email', EmailType::class,
-            ['mapped' => false])
+            ->add(
+                'Nom',
+                TextType::class,
+                ['mapped' => false]
+            )
+            ->add(
+                'Prenom',
+                TextType::class,
+                ['mapped' => false]
+            )
+            ->add(
+                'email',
+                TextType::class,
+                ['mapped' => false]
+            )
             ->add('objet', TextType::class)
             ->add('message', TextareaType::class)
-            ->add('file', FileType::class, 
-            ['label' => 'Ajouter une pièce jointe', 'mapped' => false, 'required' => false])
-            // ->add('checkbox', CheckboxType::class, ['label' => 'Accepter les conditions générales d\'utilisation', 'mapped' => false, 'constraints' => new IsTrue()])
-        ;
+            ->add(
+                'file',
+                FileType::class,
+                ['label' => 'Ajouter une pièce jointe', 'mapped' => false, 'required' => false]
+            )
+            ->add('checkbox', CheckboxType::class, ['label' => 'Accepter les conditions générales d\'utilisation', 'mapped' => false, 'constraints' => new IsTrue()]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -39,5 +50,4 @@ class ContactType extends AbstractType
             'data_class' => Message::class,
         ]);
     }
-
 }

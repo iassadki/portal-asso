@@ -1,12 +1,17 @@
 {% extends 'association/base_association.html.twig' %}
 
-{% block title %}Personalisation 1{% endblock %}
-
-{% block body %}
-    <h1>Personalisation 1</h1>
-
-    {{ include('association/_form.html.twig') }}
-    <a href="{{ path('association_home', {'name' : name}) }}">Retour</a>
-
+{% block title %}Personalisation 1
 {% endblock %}
 
+{% block body %}
+	<section class="banner-home">
+		<img id="img-bannier" src="{{ asset('img/banners/banner-rubrics-change.png')}}" alt="Banniere Home">
+		{% include 'association/sidebar.html.twig' %}
+	</section>
+
+	<div class="container-center">
+		{{ include('association/_form.html.twig') }}
+	</div>
+	<a href="{{ path('association_home', {'name' : name}) }}">Retour</a>
+
+{% endblock %}

@@ -1,12 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello!{% endblock %}
+{% block title %}Hello!
+{% endblock %}
 
 {% block body %}
-    <h1>Hello!</h1>
 
-    
-    <a href="{{ path('superadmin_login')}}">Superadmin</a>
-    <a href="{{ path('login')}}">Login</a>
+	<section class="login-section">
+		<div class="container-center">
+			<div class="grid-1">
+				<div class="grid-item">
+					<img src="{{ asset('logos/logo.png') }}" alt="Logo">
+				</div>
+			</div>
+		</section>
 
-{% endblock %}
+		<section class="rubrics">
+			<h2 class="section-title">Bonjour</h2>
+			<div class="grid-2" style="display: flex;">
+				<div class="grid-item">
+					<img class="img-rubrics" src="{{ asset('img/banners/banner-super-admin.png') }}" alt="Super Admin">
+					<button id="button-basic">
+						<a class="button-link" href="{{ path('superadmin_login')}}">Superadmin</a>
+						<img class="right-arrow normal" src="{{ asset('icons/blue/right-arrow.svg') }}" alt="Right Arrow">
+						<img class="right-arrow hover" src="{{ asset('icons/white/right-arrow.svg') }}" alt="Right Arrow">
+					</button>
+				</div>
+				<div class="grid-item">
+					<img class="img-rubrics" src="{{ asset('img/banners/banner-account.png') }}" alt="Login">
+					<button id="button-basic">
+						<a class="button-link" href="{{ path('login')}}">Login</a>
+						<img class="right-arrow normal" src="{{ asset('icons/blue/right-arrow.svg') }}" alt="Right Arrow">
+						<img class="right-arrow hover" src="{{ asset('icons/white/right-arrow.svg') }}" alt="Right Arrow">
+					</button>
+				</div>
+			</section>
+
+		{% endblock %}
