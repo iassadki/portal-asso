@@ -1,4 +1,7 @@
 # portal-asso
+
+## 💻 Lien git 
+https://github.com/iassadki/portal-asso
   
 ## 💻 Le projet
 Template pour associations et adhérents d'associations. Le but est de rassembler des adhérents grâce a la création d'evenements, la communication par messages, et la gestion de l'association par les présidents de ces associations.
@@ -11,14 +14,19 @@ Template pour associations et adhérents d'associations. Le but est de rassemble
 
 ## 🛠 Lancer le projet
 1. 
-```
+```shell
 composer install
 ```
 2. 
-```
+```shell
 composer require symfony/webpack-encore-bundle
 ```
 
 ## 🛠 Technologies
 - Languages : `JavaScript`, `HTML`, `CSS`, `PHP`
 - Framework : Symfony
+
+## Participants
+- Tümay
+- Jordy
+- Ilias
