@@ -54,11 +54,10 @@ class AssociationController extends AbstractController
         $asso = $associationRepository->findOneBy(['nom' => $name]);
         $users = $userRepository->findBy(['asso' => $asso->getId()]);
         $headerVariables = $this->getHeaderVariables($name, $associationRepository);
-
-        //afficher les utilisateurs de l'association
+        $admin = $this->getUser()->getPrenom();
 
         return $this->render('association/admin.html.twig',
-            array_merge($headerVariables, ['name' => $name, 'users' => $users]));
+            array_merge($headerVariables, ['name' => $name, 'users' => $users, 'admin' => $admin]));
     }
 
     #[Route('/{name}/admin/newUser', name: 'admin_newUser', methods: ['GET'])]

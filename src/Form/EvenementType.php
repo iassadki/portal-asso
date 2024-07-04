@@ -15,19 +15,44 @@ class EvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('description')
-            ->add('lieu')
+            ->add('nom', null, [
+                'label' => 'Nom de l\'événement',
+                'attr' => [
+                    'id' => 'event-name'
+                ]
+            ])
+            ->add('description', null, [
+                'label' => 'Description de l\'événement',
+                'attr' => [
+                    'id' => 'event-description'
+                ]
+            ])
+            ->add('lieu', null, [
+                'label' => 'Lieu de l\'événement',
+                'attr' => [
+                    'id' => 'event-location'
+                ]
+            ])
             ->add('dateDebut', DateType::class, [
                 'widget' => 'single_text',
+                'attr' => [
+                    'id' => 'event-date'
+                ]
             ])
             ->add('dateFin', DateType::class, [
                 'widget' => 'single_text',
+                'attr' => [
+                    'id' => 'event-date'
+                ]
             ])  
             ->add('image', FileType::class, [
-                'label' => 'Image',
+                'label' => 'Image de l\'événement',
                 'mapped' => false,
                 'required' => false,
+                'attr' => [
+                    'id' => 'event-image', 
+
+                ],
                 'constraints' => [
                     new File([
                         'maxSize' => '100M',

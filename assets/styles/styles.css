@@ -39,7 +39,6 @@
 
 .input-container input {
     width: 100%;
-    /* text-transform: uppercase; */
 }
 
 .checkbox-connexion {
@@ -267,6 +266,7 @@ section h2 {
     margin-top: 40px;
     align-items: center;
     text-align: left;
+    margin: 10px;
 }
 
 .superadmin-table {

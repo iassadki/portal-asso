@@ -470,6 +470,7 @@ section .return-arrow img {
     font-size: 16px;
     font-family: var(--primary-font);
     transition: background-color 0.3s ease;
+    text-transform: unset   ;
 }
 
 .contact-form option {
@@ -655,8 +656,8 @@ section .return-arrow img {
     border: 1px solid var(--primary-color);
     border-radius: 5px;
     box-sizing: border-box;
-    /* text-transform: uppercase; */
     margin-bottom: 20px;
+    text-transform: unset;
 }
 
 .scrollTop {

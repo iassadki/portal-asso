@@ -310,7 +310,9 @@
         },
         "files": [
             "./assets/app.js",
-            "./assets/styles/app.css",
+            "./assets/styles/general.css",
+            "./assets/styles/styles.css",
+            "./assets/styles/header-footer.css",
             "./config/packages/webpack_encore.yaml",
             "./package.json",
             "./webpack.config.js"
