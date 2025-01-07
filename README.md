@@ -1,18 +1,20 @@
+
+
 # portal-asso
 
-## 💻 Lien git 
-https://github.com/iassadki/portal-asso
-  
-## 💻 Le projet
-Template pour associations et adhérents d'associations. Le but est de rassembler des adhérents grâce a la création d'evenements, la communication par messages, et la gestion de l'association par les présidents de ces associations.
+## 💻 Git Link 
+[https://github.com/iassadki/portal-asso](https://github.com/iassadki/portal-asso)
 
-## ⚙️ Fonctionnalités
-- Accéder aux différents événements et y participer (admin et adhérent)
-- Choisir les différentes rubriques que l'on souhaite afficher sur son espace (admin)
-- Choisir un logo pour son association (admin)
-- Accéder au formulaire de contact
+## 💻 Project
+A template for associations and their members. The goal is to bring members together through event creation, communication via messages, and association management by association presidents. This project was developed collaboratively by a team.
 
-## 🛠 Lancer le projet
+## ⚙️ Features
+- Access various events and participate in them (admin and member).
+- Select the different sections to display in their space (admin).
+- Choose a logo for their association (admin).
+- Access the contact form.
+
+## 🛠 Running the Project
 1. 
 ```shell
 composer install
@@ -23,10 +25,5 @@ composer require symfony/webpack-encore-bundle
 ```
 
 ## 🛠 Technologies
-- Languages : `JavaScript`, `HTML`, `CSS`, `PHP`
-- Framework : Symfony
-
-## Participants
-- Tümay
-- Jordy
-- Ilias
+- Languages: `JavaScript`, `HTML`, `CSS`, `PHP`
+- Framework: Symfony
